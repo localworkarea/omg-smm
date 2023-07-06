@@ -1,3 +1,125 @@
-//====================================================================================================
+.main {
+  // .main__container
+  &__container {
+    display: flex;
+  }
+  // .main__sliders-group
+  &__sliders-group {
+    display: flex;
+    column-gap: rem(12);
+  }
 
-//====================================================================================================
+  // ------------ .main__one-slider ========== //
+  &__one-slider {
+  }
+  // .main__one-wrapper
+  &__one-wrapper {
+  }
+  // .main__one-slide
+  &__one-slide {
+  }
+
+  // ------------- .main__two-slider ========= //
+  &__two-slider {
+  }
+  // .main__two-wrapper
+  &__two-wrapper {
+  }
+  // .main__two-slide
+  &__two-slide {
+  }
+
+  // ------------- .main__three-slider =========== //
+  &__three-slider {
+  }
+  // .main__three-wrapper
+  &__three-wrapper {
+  }
+  // .main__three-slide
+  &__three-slide {
+  }
+
+  // -------  .main__body ==================== //
+  &__body {
+    flex: 1;
+  }
+  // .main__head
+  &__head {
+  }
+  // .main__vector
+  &__vector {
+  }
+  // .main__title
+  &__title {
+  }
+  // .main__sub-title
+  &__sub-title {
+  }
+  // .main__bottom
+  &__bottom {
+  }
+  // .main__link
+  &__link {
+  }
+  // .main__img-man
+  &__img-man {
+  }
+}
+
+.swiper {
+}
+.swiper-wrapper {
+}
+.swiper-slide {
+}
+
+.main-slide {
+  padding: rem(11);
+  width: 100%;
+  max-width: rem(268);
+  border-radius: rem(24);
+  border: rem(0.8) solid #000;
+  // .main-slide__link-ibg
+  &__link-ibg {
+    display: block;
+    width: 100%;
+    border-radius: rem(16) rem(16) 0 0;
+    border: rem(0.8) solid #000;
+    overflow: hidden;
+    // .main-slide__link-ibg_contain
+    &_contain {
+    }
+    img {
+      position: relative;
+      scale: 1.01;
+    }
+  }
+  // .main-slide__bottom
+  &__bottom {
+    padding: rem(5) 0 rem(10) rem(2.6);
+    display: flex;
+    justify-content: space-between;
+  }
+	// .main-slide__icon-body
+	&__icon-body {
+    display: flex;
+    column-gap: rem(5.7);
+	}
+  // .main-slide__icon
+  &__icon {
+    &.icon-like {
+      width: rem(21.5);
+      height: auto;
+    }
+    &.icon-comment {
+      width: rem(17.6);
+      height: auto;
+    }
+    &.icont-bookmark {
+      width: rem(16.9);
+      height: auto;
+    }
+    
+  }
+}
+
