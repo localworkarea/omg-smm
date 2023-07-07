@@ -86,7 +86,7 @@
 		 	opacity: 0;
 			transition: all .1s ease .3s;
 
-			border-radius: 0 0 rem(20) rem(20);
+			border-radius: 0 0 rem(40) rem(40);
 			height: rem(84);
 			background-color: white;
 			.menu-open & {
@@ -96,6 +96,7 @@
 		}
 		@media (max-width:em(768)){
 			 height: rem(68); 
+			 border-radius: 0 0 rem(20) rem(20);
 		}
 		@media (max-width:em(480)){
 			height: rem(58);

@@ -10,7 +10,7 @@
 import Swiper from 'swiper';
 import { Navigation, Autoplay } from 'swiper/modules';
 
-Swiper.use([Navigation, Autoplay]);
+// Swiper.use([Navigation, Autoplay]);
 /*
 Основні модулі слайдера:
 Navigation, Pagination, Autoplay, 
@@ -20,148 +20,132 @@ EffectFade, Lazy, Manipulation
 
 // Стилі Swiper
 // Базові стилі
-// import "../../scss/base/swiper.scss";
+import "../../scss/base/swiper.scss";
 // Повний набір стилів з scss/libs/swiper.scss
-import "../../scss/libs/swiper.scss";
+// import "../../scss/libs/swiper.scss";
 // Повний набір стилів з node_modules
 // import 'swiper/css';
 
 // Ініціалізація слайдерів
 function initSliders() {
 	if (document.querySelector('.main__one-slider')) {
-		new Swiper('.main__one-slider', {
+		var swiperOne = new Swiper('.main__one-slider', {
 			direction: 'vertical',
-			modules: [Navigation, Autoplay],
+			modules: [Autoplay],
 			observer: true,
 			observeParents: true,
 			slidesPerView: "auto",
 			spaceBetween: 12,
 			autoHeight: true,
+			speed: 2200,
 			loop: true,
-			speed: 2500,
-			//touchRatio: 0,
-			//simulateTouch: false,
-			// autoplay: true,
 			autoplay: {
-				delay: 0, // Установите задержку в 0 для отключения задержки между слайдами
-				disableOnInteraction: true,
+				delay: 700,
+				// stopOnLastSlide: false,
+				disableOnInteraction: false,
 			},
-			
-			//preloadImages: false,
-			//lazy: true,
-			
-		
-			// Події
+			breakpoints: {
+				320: {
+					spaceBetween: 7.5,
+				},
+				1201: {
+					spaceBetween: 12,
+				},
+			},
 			on: {
-
-			}
+			},
+		});
+	
+		var swiperContainerOne = document.querySelector('.main__one-slider');
+		swiperContainerOne.addEventListener('mouseenter', function() {
+				swiperOne.autoplay.stop();
+		});
+		swiperContainerOne.addEventListener('mouseleave', function() {
+				swiperOne.autoplay.start();
 		});
 	}
+	
+	
 	if (document.querySelector('.main__two-slider')) {
-		new Swiper('.main__two-slider', {
+		var swiperTwo = new Swiper('.main__two-slider', {
 			direction: 'vertical',
-			modules: [Navigation, Autoplay],
+			modules: [Autoplay],
 			observer: true,
 			observeParents: true,
 			slidesPerView: "auto",
 			spaceBetween: 12,
 			autoHeight: true,
-			speed: 3700,
-			//touchRatio: 0,
-			//simulateTouch: false,
+			speed: 2200,
 			loop: true,
-			//preloadImages: false,
-			//lazy: true,
-			
-			// Ефекти
-			// effect: 'fade',
 			autoplay: {
-				delay: 500, // Задержка между слайдами (3000 миллисекунд = 3 секунды)
-				pauseOnMouseEnter: true,
-				reverseDirection: true,
-				stopOnLastSlide: false,
-				disableOnInteraction: true, // Продолжать автопрокрутку после взаимодействия пользователя с слайдером
+				delay: 700,
+				// reverseDirection: true,
+				disableOnInteraction: false,
 			},
-			
-		
-			/*
-			// Брейкпоінти
 			breakpoints: {
-				640: {
-					slidesPerView: 1,
-					spaceBetween: 0,
-					autoHeight: true,
+				320: {
+					spaceBetween: 7.5,
 				},
-				768: {
-					slidesPerView: 2,
-					spaceBetween: 20,
-				},
-				992: {
-					slidesPerView: 3,
-					spaceBetween: 20,
-				},
-				1268: {
-					slidesPerView: 4,
-					spaceBetween: 30,
+				1201: {
+					spaceBetween: 12,
 				},
 			},
-			*/
-			// Події
+			on: {
+			},
+		});
+	
+		var swiperContainerTwo = document.querySelector('.main__two-slider');
+		swiperContainerTwo.addEventListener('mouseenter', function() {
+			swiperTwo.autoplay.stop();
+		});
+		swiperContainerTwo.addEventListener('mouseleave', function() {
+			swiperTwo.autoplay.start();
+		});
+		
+	}
+	
+	
+
+
+	if (document.querySelector('.main__three-slider')) {
+		var swiperThree =	new Swiper('.main__three-slider', {
+			direction: 'vertical',
+			modules: [Autoplay],
+			observer: true,
+			observeParents: true,
+			slidesPerView: "auto",
+			spaceBetween: 12,
+			autoHeight: true,
+			speed: 2200,
+			loop: true,
+			autoplay: {
+				delay: 700,
+				disableOnInteraction: false, 
+			},
+			breakpoints: {
+				320: {
+					spaceBetween: 7.5,
+					direction: 'horizontal',
+					autoHeight: false,
+				},
+				993: {
+					direction: 'vertical',
+				},
+				1201: {
+					spaceBetween: 12,
+				},
+			},
 			on: {
 
 			}
 		});
-	}
-	if (document.querySelector('.main__three-slider')) {
-		new Swiper('.main__three-slider', {
-			direction: 'vertical',
-			modules: [Navigation, Autoplay],
-			observer: true,
-			observeParents: true,
-			slidesPerView: "auto",
-			spaceBetween: 12,
-			autoHeight: true,
-			speed: 2000,
-			//touchRatio: 0,
-			//simulateTouch: false,
-			loop: true,
-			//preloadImages: false,
-			//lazy: true,
-			
-			// Ефекти
-			// effect: 'fade',
-			autoplay: {
-				// delay: 3000, // Задержка между слайдами (3000 миллисекунд = 3 секунды)
-				disableOnInteraction: false, // Продолжать автопрокрутку после взаимодействия пользователя с слайдером
-			},
-			
-		
-			/*
-			// Брейкпоінти
-			breakpoints: {
-				640: {
-					slidesPerView: 1,
-					spaceBetween: 0,
-					autoHeight: true,
-				},
-				768: {
-					slidesPerView: 2,
-					spaceBetween: 20,
-				},
-				992: {
-					slidesPerView: 3,
-					spaceBetween: 20,
-				},
-				1268: {
-					slidesPerView: 4,
-					spaceBetween: 30,
-				},
-			},
-			*/
-			// Події
-			on: {
 
-			}
+		var swiperContainerThree = document.querySelector('.main__three-slider');
+		swiperContainerThree.addEventListener('mouseenter', function() {
+				swiperThree.autoplay.stop();
+		});
+		swiperContainerThree.addEventListener('mouseleave', function() {
+				swiperThree.autoplay.start();
 		});
 	}
 	// if (document.querySelector('.swiper')) {

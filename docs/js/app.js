@@ -1,5 +1,6 @@
 (() => {
     "use strict";
+    const modules_flsModules = {};
     function isWebp() {
         function testWebP(callback) {
             let webP = new Image;
@@ -89,6 +90,66 @@
             }
         }));
     }
+    function functions_FLS(message) {
+        setTimeout((() => {
+            if (window.FLS) console.log(message);
+        }), 0);
+    }
+    class MousePRLX {
+        constructor(props, data = null) {
+            let defaultConfig = {
+                init: true,
+                logging: true
+            };
+            this.config = Object.assign(defaultConfig, props);
+            if (this.config.init) {
+                const paralaxMouse = document.querySelectorAll("[data-prlx-mouse]");
+                if (paralaxMouse.length) {
+                    this.paralaxMouseInit(paralaxMouse);
+                    this.setLogging(`Прокинувся, стежу за об'єктами: (${paralaxMouse.length})`);
+                } else this.setLogging("Немає жодного обєкта. Сплю...");
+            }
+        }
+        paralaxMouseInit(paralaxMouse) {
+            paralaxMouse.forEach((el => {
+                const paralaxMouseWrapper = el.closest("[data-prlx-mouse-wrapper]");
+                const paramСoefficientX = el.dataset.prlxCx ? +el.dataset.prlxCx : 100;
+                const paramСoefficientY = el.dataset.prlxCy ? +el.dataset.prlxCy : 100;
+                const directionX = el.hasAttribute("data-prlx-dxr") ? -1 : 1;
+                const directionY = el.hasAttribute("data-prlx-dyr") ? -1 : 1;
+                const paramAnimation = el.dataset.prlxA ? +el.dataset.prlxA : 50;
+                let positionX = 0, positionY = 0;
+                let coordXprocent = 0, coordYprocent = 0;
+                setMouseParallaxStyle();
+                if (paralaxMouseWrapper) mouseMoveParalax(paralaxMouseWrapper); else mouseMoveParalax();
+                function setMouseParallaxStyle() {
+                    const distX = coordXprocent - positionX;
+                    const distY = coordYprocent - positionY;
+                    positionX += distX * paramAnimation / 1e3;
+                    positionY += distY * paramAnimation / 1e3;
+                    el.style.cssText = `transform: translate3D(${directionX * positionX / (paramСoefficientX / 10)}%,${directionY * positionY / (paramСoefficientY / 10)}%,0) rotate(0.02deg);`;
+                    requestAnimationFrame(setMouseParallaxStyle);
+                }
+                function mouseMoveParalax(wrapper = window) {
+                    wrapper.addEventListener("mousemove", (function(e) {
+                        const offsetTop = el.getBoundingClientRect().top + window.scrollY;
+                        if (offsetTop >= window.scrollY || offsetTop + el.offsetHeight >= window.scrollY) {
+                            const parallaxWidth = window.innerWidth;
+                            const parallaxHeight = window.innerHeight;
+                            const coordX = e.clientX - parallaxWidth / 2;
+                            const coordY = e.clientY - parallaxHeight / 2;
+                            coordXprocent = coordX / parallaxWidth * 100;
+                            coordYprocent = coordY / parallaxHeight * 100;
+                        }
+                    }));
+                }
+            }));
+        }
+        setLogging(message) {
+            this.config.logging ? functions_FLS(`[PRLX Mouse]: ${message}`) : null;
+        }
+    }
+    modules_flsModules.mousePrlx = new MousePRLX({});
     function ssr_window_esm_isObject(obj) {
         return obj !== null && typeof obj === "object" && "constructor" in obj && obj.constructor === Object;
     }
@@ -2778,169 +2839,6 @@
         }));
     }));
     swiper_core_Swiper.use([ Resize, Observer ]);
-    function create_element_if_not_defined_createElementIfNotDefined(swiper, originalParams, params, checkProps) {
-        if (swiper.params.createElements) Object.keys(checkProps).forEach((key => {
-            if (!params[key] && params.auto === true) {
-                let element = utils_elementChildren(swiper.el, `.${checkProps[key]}`)[0];
-                if (!element) {
-                    element = utils_createElement("div", checkProps[key]);
-                    element.className = checkProps[key];
-                    swiper.el.append(element);
-                }
-                params[key] = element;
-                originalParams[key] = element;
-            }
-        }));
-        return params;
-    }
-    function Navigation(_ref) {
-        let {swiper, extendParams, on, emit} = _ref;
-        extendParams({
-            navigation: {
-                nextEl: null,
-                prevEl: null,
-                hideOnClick: false,
-                disabledClass: "swiper-button-disabled",
-                hiddenClass: "swiper-button-hidden",
-                lockClass: "swiper-button-lock",
-                navigationDisabledClass: "swiper-navigation-disabled"
-            }
-        });
-        swiper.navigation = {
-            nextEl: null,
-            prevEl: null
-        };
-        const makeElementsArray = el => {
-            if (!Array.isArray(el)) el = [ el ].filter((e => !!e));
-            return el;
-        };
-        function getEl(el) {
-            let res;
-            if (el && typeof el === "string" && swiper.isElement) {
-                res = swiper.el.querySelector(el);
-                if (res) return res;
-            }
-            if (el) {
-                if (typeof el === "string") res = [ ...document.querySelectorAll(el) ];
-                if (swiper.params.uniqueNavElements && typeof el === "string" && res.length > 1 && swiper.el.querySelectorAll(el).length === 1) res = swiper.el.querySelector(el);
-            }
-            if (el && !res) return el;
-            return res;
-        }
-        function toggleEl(el, disabled) {
-            const params = swiper.params.navigation;
-            el = makeElementsArray(el);
-            el.forEach((subEl => {
-                if (subEl) {
-                    subEl.classList[disabled ? "add" : "remove"](...params.disabledClass.split(" "));
-                    if (subEl.tagName === "BUTTON") subEl.disabled = disabled;
-                    if (swiper.params.watchOverflow && swiper.enabled) subEl.classList[swiper.isLocked ? "add" : "remove"](params.lockClass);
-                }
-            }));
-        }
-        function update() {
-            const {nextEl, prevEl} = swiper.navigation;
-            if (swiper.params.loop) {
-                toggleEl(prevEl, false);
-                toggleEl(nextEl, false);
-                return;
-            }
-            toggleEl(prevEl, swiper.isBeginning && !swiper.params.rewind);
-            toggleEl(nextEl, swiper.isEnd && !swiper.params.rewind);
-        }
-        function onPrevClick(e) {
-            e.preventDefault();
-            if (swiper.isBeginning && !swiper.params.loop && !swiper.params.rewind) return;
-            swiper.slidePrev();
-            emit("navigationPrev");
-        }
-        function onNextClick(e) {
-            e.preventDefault();
-            if (swiper.isEnd && !swiper.params.loop && !swiper.params.rewind) return;
-            swiper.slideNext();
-            emit("navigationNext");
-        }
-        function init() {
-            const params = swiper.params.navigation;
-            swiper.params.navigation = create_element_if_not_defined_createElementIfNotDefined(swiper, swiper.originalParams.navigation, swiper.params.navigation, {
-                nextEl: "swiper-button-next",
-                prevEl: "swiper-button-prev"
-            });
-            if (!(params.nextEl || params.prevEl)) return;
-            let nextEl = getEl(params.nextEl);
-            let prevEl = getEl(params.prevEl);
-            Object.assign(swiper.navigation, {
-                nextEl,
-                prevEl
-            });
-            nextEl = makeElementsArray(nextEl);
-            prevEl = makeElementsArray(prevEl);
-            const initButton = (el, dir) => {
-                if (el) el.addEventListener("click", dir === "next" ? onNextClick : onPrevClick);
-                if (!swiper.enabled && el) el.classList.add(...params.lockClass.split(" "));
-            };
-            nextEl.forEach((el => initButton(el, "next")));
-            prevEl.forEach((el => initButton(el, "prev")));
-        }
-        function destroy() {
-            let {nextEl, prevEl} = swiper.navigation;
-            nextEl = makeElementsArray(nextEl);
-            prevEl = makeElementsArray(prevEl);
-            const destroyButton = (el, dir) => {
-                el.removeEventListener("click", dir === "next" ? onNextClick : onPrevClick);
-                el.classList.remove(...swiper.params.navigation.disabledClass.split(" "));
-            };
-            nextEl.forEach((el => destroyButton(el, "next")));
-            prevEl.forEach((el => destroyButton(el, "prev")));
-        }
-        on("init", (() => {
-            if (swiper.params.navigation.enabled === false) disable(); else {
-                init();
-                update();
-            }
-        }));
-        on("toEdge fromEdge lock unlock", (() => {
-            update();
-        }));
-        on("destroy", (() => {
-            destroy();
-        }));
-        on("enable disable", (() => {
-            let {nextEl, prevEl} = swiper.navigation;
-            nextEl = makeElementsArray(nextEl);
-            prevEl = makeElementsArray(prevEl);
-            [ ...nextEl, ...prevEl ].filter((el => !!el)).forEach((el => el.classList[swiper.enabled ? "remove" : "add"](swiper.params.navigation.lockClass)));
-        }));
-        on("click", ((_s, e) => {
-            let {nextEl, prevEl} = swiper.navigation;
-            nextEl = makeElementsArray(nextEl);
-            prevEl = makeElementsArray(prevEl);
-            const targetEl = e.target;
-            if (swiper.params.navigation.hideOnClick && !prevEl.includes(targetEl) && !nextEl.includes(targetEl)) {
-                if (swiper.pagination && swiper.params.pagination && swiper.params.pagination.clickable && (swiper.pagination.el === targetEl || swiper.pagination.el.contains(targetEl))) return;
-                let isHidden;
-                if (nextEl.length) isHidden = nextEl[0].classList.contains(swiper.params.navigation.hiddenClass); else if (prevEl.length) isHidden = prevEl[0].classList.contains(swiper.params.navigation.hiddenClass);
-                if (isHidden === true) emit("navigationShow"); else emit("navigationHide");
-                [ ...nextEl, ...prevEl ].filter((el => !!el)).forEach((el => el.classList.toggle(swiper.params.navigation.hiddenClass)));
-            }
-        }));
-        const enable = () => {
-            swiper.el.classList.remove(...swiper.params.navigation.navigationDisabledClass.split(" "));
-            init();
-            update();
-        };
-        const disable = () => {
-            swiper.el.classList.add(...swiper.params.navigation.navigationDisabledClass.split(" "));
-            destroy();
-        };
-        Object.assign(swiper.navigation, {
-            enable,
-            disable,
-            update,
-            init,
-            destroy
-        });
-    }
     function Autoplay(_ref) {
         let {swiper, extendParams, on, emit, params} = _ref;
         swiper.autoplay = {
@@ -3180,58 +3078,111 @@
             resume
         });
     }
-    swiper_core_Swiper.use([ Navigation, Autoplay ]);
     function initSliders() {
-        if (document.querySelector(".main__one-slider")) new swiper_core_Swiper(".main__one-slider", {
-            direction: "vertical",
-            modules: [ Navigation, Autoplay ],
-            observer: true,
-            observeParents: true,
-            slidesPerView: "auto",
-            spaceBetween: 12,
-            autoHeight: true,
-            loop: true,
-            speed: 2500,
-            autoplay: {
-                delay: 0,
-                disableOnInteraction: true
-            },
-            on: {}
-        });
-        if (document.querySelector(".main__two-slider")) new swiper_core_Swiper(".main__two-slider", {
-            direction: "vertical",
-            modules: [ Navigation, Autoplay ],
-            observer: true,
-            observeParents: true,
-            slidesPerView: "auto",
-            spaceBetween: 12,
-            autoHeight: true,
-            speed: 3700,
-            loop: true,
-            autoplay: {
-                delay: 500,
-                pauseOnMouseEnter: true,
-                reverseDirection: true,
-                stopOnLastSlide: false,
-                disableOnInteraction: true
-            },
-            on: {}
-        });
-        if (document.querySelector(".main__three-slider")) new swiper_core_Swiper(".main__three-slider", {
-            direction: "vertical",
-            modules: [ Navigation, Autoplay ],
-            observer: true,
-            observeParents: true,
-            slidesPerView: "auto",
-            spaceBetween: 12,
-            autoHeight: true,
-            speed: 2e3,
-            loop: true,
-            autoplay: {
-                disableOnInteraction: false
-            },
-            on: {}
-        });
+        if (document.querySelector(".main__one-slider")) {
+            var swiperOne = new swiper_core_Swiper(".main__one-slider", {
+                direction: "vertical",
+                modules: [ Autoplay ],
+                observer: true,
+                observeParents: true,
+                slidesPerView: "auto",
+                spaceBetween: 12,
+                autoHeight: true,
+                speed: 2200,
+                loop: true,
+                autoplay: {
+                    delay: 700,
+                    disableOnInteraction: false
+                },
+                breakpoints: {
+                    320: {
+                        spaceBetween: 7.5
+                    },
+                    1201: {
+                        spaceBetween: 12
+                    }
+                },
+                on: {}
+            });
+            var swiperContainerOne = document.querySelector(".main__one-slider");
+            swiperContainerOne.addEventListener("mouseenter", (function() {
+                swiperOne.autoplay.stop();
+            }));
+            swiperContainerOne.addEventListener("mouseleave", (function() {
+                swiperOne.autoplay.start();
+            }));
+        }
+        if (document.querySelector(".main__two-slider")) {
+            var swiperTwo = new swiper_core_Swiper(".main__two-slider", {
+                direction: "vertical",
+                modules: [ Autoplay ],
+                observer: true,
+                observeParents: true,
+                slidesPerView: "auto",
+                spaceBetween: 12,
+                autoHeight: true,
+                speed: 2200,
+                loop: true,
+                autoplay: {
+                    delay: 700,
+                    disableOnInteraction: false
+                },
+                breakpoints: {
+                    320: {
+                        spaceBetween: 7.5
+                    },
+                    1201: {
+                        spaceBetween: 12
+                    }
+                },
+                on: {}
+            });
+            var swiperContainerTwo = document.querySelector(".main__two-slider");
+            swiperContainerTwo.addEventListener("mouseenter", (function() {
+                swiperTwo.autoplay.stop();
+            }));
+            swiperContainerTwo.addEventListener("mouseleave", (function() {
+                swiperTwo.autoplay.start();
+            }));
+        }
+        if (document.querySelector(".main__three-slider")) {
+            var swiperThree = new swiper_core_Swiper(".main__three-slider", {
+                direction: "vertical",
+                modules: [ Autoplay ],
+                observer: true,
+                observeParents: true,
+                slidesPerView: "auto",
+                spaceBetween: 12,
+                autoHeight: true,
+                speed: 2200,
+                loop: true,
+                autoplay: {
+                    delay: 700,
+                    disableOnInteraction: false
+                },
+                breakpoints: {
+                    320: {
+                        spaceBetween: 7.5,
+                        direction: "horizontal",
+                        autoHeight: false
+                    },
+                    993: {
+                        direction: "vertical"
+                    },
+                    1201: {
+                        spaceBetween: 12
+                    }
+                },
+                on: {}
+            });
+            var swiperContainerThree = document.querySelector(".main__three-slider");
+            swiperContainerThree.addEventListener("mouseenter", (function() {
+                swiperThree.autoplay.stop();
+            }));
+            swiperContainerThree.addEventListener("mouseleave", (function() {
+                swiperThree.autoplay.start();
+            }));
+        }
     }
     window.addEventListener("load", (function(e) {
         initSliders();
