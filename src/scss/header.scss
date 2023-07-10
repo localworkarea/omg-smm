@@ -94,14 +94,14 @@
 				transition-delay: 0s;
 			 }
 		}
-		@media (max-width:em(768)){
+		@media (max-width:em(768.98)){
 			 height: rem(68); 
 			 border-radius: 0 0 rem(20) rem(20);
 		}
-		@media (max-width:em(480)){
+		@media (max-width:em(480.98)){
 			height: rem(58);
 		}
-		@media (max-width:em(375)){
+		@media (max-width:em(375.98)){
 			height: rem(54);
 		}
 	}
