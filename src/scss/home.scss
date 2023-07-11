@@ -1,8 +1,11 @@
+// =========================================================
+// -- 01 MAIN SECTION -----------------------------------------
+// =========================================================
 .main {
   // .main__container
   &__container {
     display: flex;
-    @media (max-width: em(992)){
+    @media (max-width: $tablet){
         flex-direction: column-reverse;
     }
   }
@@ -11,23 +14,23 @@
     display: flex;
     column-gap: rem(12);
     width: 36%;
-    @media (max-width: em(1200)){
+    @media (max-width: em(1200.98)){
         column-gap: rem(7.5);
     }
-    @media (max-width: em(992)){
+    @media (max-width: $tablet){
         display: none;
     }
   }
 
   // ------------ .main__one-slider ========== //
   &__one-slider {
-    @media (max-width: em(992)){
+    @media (max-width: $tablet){
         display: none;
     }
   }
   // .main__one-wrapper
   &__one-wrapper {
-    @media (max-width: em(992)){
+    @media (max-width: $tablet){
       display: none;
     }
   }
@@ -37,7 +40,7 @@
 
   // ------------- .main__two-slider ========= //
   &__two-slider {
-    @media (max-width: em(992)){
+    @media (max-width: $tablet){
       display: none;
     }
     &.swiper-container {
@@ -52,7 +55,7 @@
   }
   // .main__two-wrapper
   &__two-wrapper {
-    @media (max-width: em(992)){
+    @media (max-width: $tablet){
       display: none;
     }
   }
@@ -62,8 +65,10 @@
 
   // ------------- .main__three-slider =========== //
   &__three-slider {
-    width: 16.4%;
-    @media (max-width: em(992)){
+    width: 17.8%;
+    position: relative;
+    z-index: 2;
+    @media (max-width: $tablet){
         width: 100%;
         height: 100%;
         min-height: rem(373);
@@ -83,11 +88,12 @@
 
   // -------  .main__body ==================== //
   &__body {
-    width: 48.6%;
+    width: 44%;
+    position: relative;
     @include adaptiveValue("margin-left", 79, 20, 0, 1920,768);
     @include adaptiveValue("margin-left", 20, 0, 3, 768,480);
     margin-right: rem(20);
-    @media (max-width: em(992)){
+    @media (max-width: $tablet){
         width: auto;
         margin-right: 0;
     }
@@ -104,8 +110,8 @@
   // .main__vector
   &__vector {
     position: absolute;
-    top: 0;
-    left: 0;
+    top: 40%;
+    left: 0%;
     z-index: -1;
   }
   // .main__title
@@ -149,7 +155,7 @@
         flex-direction: column;
         justify-content: center;
         align-items: center;
-        @media (max-width: em(992)){
+        @media (max-width: $tablet){
             right: -35%;
         }
         @media (max-width: em(601)){
@@ -172,7 +178,7 @@
     text-transform: uppercase;
     @include adaptiveValue("padding-left", 72, 65, 0, 1920, 1440);
     @include adaptiveValue("padding-left", 65, 0, 0, 1440, 768);
-    @media (max-width: em(992)){
+    @media (max-width: $tablet){
         max-width: rem(600);
     }
   }
@@ -231,17 +237,16 @@
   padding: rem(11);
   width: 100%;
   max-width: rem(268);
-  // width: rem(268);
   border-radius: rem(24);
   border: rem(0.8) solid #000;
-  @media (max-width: em(1200)){
+  @media (max-width: em(1200.98)){
       padding: rem(7);
       border-radius: rem(15)
   }
-  @media (max-width: em(992)){
+  @media (max-width: $tablet){
       max-width: rem(200);
   }
-  @media (max-width: em(481)){
+  @media (max-width: $mobileSmall){
       max-width: rem(166);
   }
   // .main-slide__link-ibg
@@ -251,7 +256,7 @@
     border: rem(0.8) solid #000;
     overflow: hidden;
     position: relative;
-    @media (max-width: em(1200)){
+    @media (max-width: em(1200.98)){
       border-radius: rem(10) rem(10) 0 0;
     }
 
@@ -298,7 +303,7 @@
 
     opacity: 0;
     transition: all .3s ease;
-    @media (max-width: em(1700)){
+    @media (max-width: em(1700.98)){
         padding: rem(0) rem(18);
     }
 
@@ -309,7 +314,7 @@
     padding: rem(5) 0 rem(10) rem(2.6);
     display: flex;
     justify-content: space-between;
-    @media (max-width: em(1200)){
+    @media (max-width: em(1200.98)){
         padding: rem(3.67) 0 rem(5) rem(2);
     }
   }
@@ -323,25 +328,519 @@
     &.icon-like {
       width: rem(21.5);
       height: auto;
-      @media (max-width: em(1200)){
+      @media (max-width: em(1200.98)){
         width: rem(13.4);
       }
     }
     &.icon-comment {
       width: rem(17.6);
       height: auto;
-      @media (max-width: em(1200)){
+      @media (max-width: em(1200.98)){
           width: rem(11);
       }
     }
     &.icont-bookmark {
       width: rem(16.9);
       height: auto;
-      @media (max-width: em(1200)){
+      @media (max-width: em(1200.98)){
         width: rem(10.4);
       }
     }
     
   }
 }
+
+// =========================================================
+// -- 02 WHY SECTION -----------------------------------------
+// =========================================================
+.why {
+  background-color: black;
+  border-radius: rem(40) rem(40) 0 0 ;
+  @include adaptiveValue("padding-top", 86, 60,0,1920,480);
+  @include adaptiveValue("padding-bottom", 140, 100,0,1920,767);
+  @include adaptiveValue("padding-bottom", 80, 60,3,768,480);
+  overflow: hidden;
+  @media (max-width:$mobileSmall){
+     border-radius: rem(0); 
+  }
+  // .why__container
+  &__container {
+    position: relative;
+    z-index: 0;
+  }
+  // .why__vector
+  &__vector {
+    position: absolute;
+    top: 0;
+    z-index: -1;
+    left: 40%;
+    @media (max-width:$mobile){
+       display: none; 
+    }
+  }
+  // .why__title
+  &__title {
+    @include adaptiveValue("margin-bottom", 61, 32,0,1920,480);
+    // .why__title_weight
+    &_weight {
+      font-weight: 700;
+    }
+    // .why__title_p
+    &_p {
+      @media (max-width:$mobileSmall){
+         margin-left: rem(44); 
+      }
+    }
+    // .why__title_italic
+    &_italic {
+      font-weight: 600;
+      font-style: italic;
+    }
+  }
+  // .why__list
+  &__list {
+    display: flex;
+    @media (max-width:$mobile){
+       flex-direction: column; 
+    }
+  }
+  // .why__item
+  &__item {
+    position: relative;
+    width: 33.333%;
+
+    display: flex;
+    padding: rem(51) rem(15) rem(51) rem(15);
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: rem(17);
+    border: rem(1) solid $secondColor;
+    background-color: black;
+
+    transition: all .3s ease;
+
+    @include adaptiveValue("border-top-left-radius", 40, 10,0,1920,480);
+    @include adaptiveValue("border-top-right-radius", 40, 10,0,1920,480);
+    @include adaptiveValue("border-bottom-left-radius", 40, 10,0,1920,480);
+    @include adaptiveValue("border-bottom-right-radius", 40, 10,0,1920,480);
+
+    &:hover {
+      background-color: $secondColor;
+      .why__txt {
+        color: black;
+      }
+      .why__link {
+        span {
+          color: black;
+        }
+      }
+      .why__link {
+        img {
+          filter: invert(8%) sepia(10%) saturate(4100%) hue-rotate(222deg) brightness(88%) contrast(96%);
+          transform: translateX(rem(5));
+        }
+      }
+    }
+
+    @media (max-width:$mobile){
+        width: auto;
+    }
+
+    &:nth-child(1) {
+      z-index: 1;
+    }
+    &:nth-child(2) {
+      z-index: 2;
+      @media (max-width:$mobile){
+        top: rem(-16);
+      }
+    }
+    &:nth-child(3) {
+      z-index: 3;
+      @media (max-width:$mobile){
+        top: rem(-32);
+      }
+    }
+  }
+  // .why__txt
+  &__txt {
+    display: block;
+    flex: 1;
+    color: $secondColor;
+    text-align: center;
+    font-size: rem(35);
+    font-weight: 600;
+    text-transform: uppercase;
+    transition: all .3s ease;
+  }
+  // .why__link
+  &__link {
+    display: flex;
+    align-items: center;
+    gap: rem(12);
+    span {
+      display: inline-block;
+      color: white;
+      font-size: rem(18);
+      font-weight: 600;
+      line-height: calc(20/18);
+      text-transform: uppercase;
+      transition: all .3s ease;
+      padding-top: rem(3);
+    }
+    img {
+      width: rem(27);
+      height: auto;
+      transition: all .3s ease;
+      filter: invert(95%) sepia(8%) saturate(2261%) hue-rotate(27deg) brightness(106%) contrast(102%);
+    }
+  }
+}
+
+// =========================================================
+// -- 03 WHATCH SECTION -----------------------------------------
+// =========================================================
+.whatch {
+  position: relative;
+  z-index: 1;
+  overflow: hidden;
+  background-color: white;
+  border-radius: rem(40) rem(40) 0 0;
+  margin-top: -40px;
+  @include adaptiveValue("padding-top", 120, 60, 0, 1920, 480);
+  @include adaptiveValue("padding-bottom", 140, 60, 0, 1920, 480);
+  @media (max-width:$mobile){
+     margin-top: 0;
+     border-radius: 0; 
+  }
+  // .whatch__container
+  &__container {
+    justify-content: space-between;
+    column-gap: rem(20);
+    display: grid;
+    grid-template-columns: 26% 66%;
+    @media (max-width:$tablet){
+      grid-template-columns: rem(256) 1fr;
+      column-gap: rem(60);
+    }
+    @media (max-width: em(700.98)){
+        grid-template-columns: auto;
+    }
+  }
+  // .whatch__content
+  &__content {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding-bottom: rem(65);
+    @media (max-width: em(1200.98)){
+        padding-bottom: 0;
+    }
+  }
+  // .whatch__head
+  &__head {
+    position: relative;
+    height: rem(188);
+    @media (max-width: em(700.98)){
+        height: rem(77);
+        width: rem(233);
+        margin-bottom: rem(25);
+    }
+  }
+  // .whatch__title
+  &__title {
+    @media (max-width: em(700.98)){
+       font-weight: 800;
+       font-style: italic; 
+    }
+  }
+  // .whatch__arrow
+  &__arrow {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+  }
+	// .whatch__arrow-pc
+	&__arrow-pc {
+    display: none;
+    @media (min-width: em(700.98)){
+       display: block; 
+    }
+	}
+	// .whatch__arrow-mob
+	&__arrow-mob {
+    display: none;
+    @media (max-width: em(700.98)){
+        display: block;
+    }
+	}
+  // .whatch__links
+  &__links {
+
+  }
+  // .whatch__subtitle
+  &__subtitle {
+    font-size: rem(30);
+    font-style: italic;
+    font-weight: 800;
+    text-transform: uppercase;
+    span {
+      display: inline-block;
+      margin-left: rem(30);
+    }
+    @include adaptiveValue("margin-bottom", 13, 26,0,1440,480);
+  }
+  // .whatch__list
+  &__list {
+    @media (max-width: em(700.98)){
+      display: grid;
+      column-gap: rem(20);
+      grid-template-columns: auto auto;
+    }
+    @media (max-width: em(360.98)){
+        grid-template-columns: auto;
+    }
+  }
+  // .whatch__item
+  &__item {
+    margin-left: rem(30);
+    @media (max-width: em(700.98)){
+      margin-left: 0;
+    }
+  }
+  // .whatch__link
+  &__link {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    gap: rem(9);
+    left: rem(-35);
+    transition: all .45s ease;
+    
+    @media (max-width: em(700.98)){
+      left: 0;
+    }
+
+    span {
+      display: inline-block;
+      font-weight: 600;
+      padding-top: rem(3);
+
+      @include adaptiveValue("font-size", 22, 20,0,1440,480);
+      line-height: calc(34/22);
+      text-transform: uppercase;
+    }
+    img {
+      position: relative;
+      width: rem(24);
+      height: auto;
+      left: rem(-10);
+      opacity: 0;
+      transition: all .45s ease;
+      
+      @media (max-width: em(700.98)){
+        left: 0;
+        opacity: 1;
+      }
+    }
+      &:hover{
+        left: 0;
+        span {
+          font-weight: 800;
+        }
+        img {
+          left: 0;
+          opacity: 1;
+        }
+      }
+  }
+  // .whatch__vector
+  &__vector {
+    position:absolute;
+    left: 0;
+    bottom: 0;
+    z-index: -1;
+  }
+  // .whatch__video
+  &__video {
+    padding-top: rem(55);
+    @media (max-width: em(700.98)){
+        display: none;
+    }
+  }
+  // .whatch__video-link
+  &__video-link {
+    display: inline-block;
+    @media (max-width: em(700.98)){
+        margin-bottom: rem(92);
+    }
+    img {
+      width: 100%;
+      max-width: rem(1060);
+      height: auto;
+    }    
+  }
+}
+
+// =========================================================
+// -- 04 EMPLOYEE SECTION -----------------------------------------
+// =========================================================
+.employee {
+  background-color: black;
+  border-radius: rem(40) rem(40) 0 0 ;
+  @include adaptiveValue("padding-top", 86, 60,0,1920,480);
+  @include adaptiveValue("padding-bottom", 115, 50,0,1920,480);
+  @media (max-width:$mobileSmall){
+     border-radius: rem(0); 
+  }
+  // .employee__container
+  &__container {
+  }
+  // .employee__title
+  &__title {
+    max-width: rem(716);
+    @include adaptiveValue("margin-bottom", 62, 32,0,1920,480);
+    span {
+      color: $secondColor;
+    }
+  }
+  // .employee__tabs
+  &__tabs {
+    display: grid;
+    grid-template-columns: rem(370) 1fr;
+    column-gap: rem(36);
+  }
+  // .employee__navigation
+  &__navigation {
+    display: flex;
+    flex-direction: column;
+  }
+	// .employee__tab-title
+	&__tab-title {
+    display: flex;
+    padding: rem(26);
+    align-items: center;
+
+    border-radius: rem(30);
+    border: rem(1) solid $secondColor;
+    background: black;
+
+    color: $secondColor;
+    @include adaptiveValue("font-size", 22, 20,0,1440,480);
+    font-weight: 600;
+    text-transform: uppercase;
+    transition: all .3s ease;
+
+    &._tab-active {
+      background-color: $secondColor;
+      color: $mainColor;
+      font-weight: 600;
+    }
+	}
+  // .employee__content
+  &__content {
+  }
+  // .employee__body
+  &__body {
+  }
+}
+
+.employee-slider-one {
+  // .employee-slider-one__slider
+  &__slider {
+    position: relative;
+    &::before {
+      content:'';
+      position: absolute;
+      top: 0;
+      right: 0;
+      z-index: 2;
+      width: rem(320);
+      height: 100%;
+      flex-shrink: 0;
+      background: linear-gradient(-90deg, #000 0%, rgba(0, 0, 0, 0.00) 100%);
+      pointer-events: none;
+    }
+  }
+  // .employee-slider-one__wrapper
+  &__wrapper {
+  }
+  // .employee-slider-one__slide
+  &__slide {
+  }
+}
+
+.slide-employee-slider {
+  // .slide-employee-slider__img-link
+  &__img-link {
+    display: block;
+    overflow: hidden;
+    border-radius: rem(14.3);
+    width: 100%;
+    height: 100%;
+    max-width: rem(483);
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
+  }
+  // .slide-employee-slider__link
+  &__link {
+    display: inline-flex;
+  }
+}
+
+.employee-sliders {
+  // .employee-sliders__buttons
+  &__buttons {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    display: flex;
+    width: 100%;
+    align-items: center;
+    justify-content: space-between;
+    .swiper-button-prev {
+      &.swiper-button-disabled {
+        opacity: 0;
+        pointer-events: none;
+      }
+    }
+    .swiper-button-next {
+    }
+  }
+}
+
+
+
+// =========================================================
+// -- 05 BLOG SECTION -----------------------------------------
+// =========================================================
+
+
+
+// =========================================================
+// -- 07 SERVICES SECTION -----------------------------------------
+// =========================================================
+
+
+
+// =========================================================
+// -- 08 PROJECTS SECTION -----------------------------------------
+// =========================================================
+
+
+
+// =========================================================
+// -- 09 CASES SECTION -----------------------------------------
+// =========================================================
+
+
+
+// =========================================================
+// -- 10 FORM SECTION -----------------------------------------
+// =========================================================
 
