@@ -155,23 +155,46 @@ function initSliders() {
 			observeParents: true,
 			slidesPerView: "auto",
 			spaceBetween: 14,
-			// autoHeight: true,
 			speed: 500,
-			// freeMode: true,
-			//loop: true,
 			navigation: {
 				prevEl: '.employee-slider-one__slider .swiper-button-prev',
 				nextEl: '.employee-slider-one__slider .swiper-button-next',
 			},
-			// breakpoints: {
-			// 	300: {
-			// 		slidesPerView: 2,
-			// 	},
-			// 	1280: {
-			// 		slidesPerView: "auto",
-			// 	},
-			// },
-			// Події
+			on: {
+
+			}
+		});
+	}
+	if (document.querySelector('.employee-slider-two__slider')) {
+		new Swiper('.employee-slider-two__slider', {
+			modules: [Navigation],
+			observer: true,
+			observeParents: true,
+			slidesPerView: "auto",
+			spaceBetween: 14,
+			speed: 500,
+			navigation: {
+				prevEl: '.employee-slider-two__slider .swiper-button-prev',
+				nextEl: '.employee-slider-two__slider .swiper-button-next',
+			},
+			on: {
+
+			}
+		});
+	}
+	if (document.querySelector('.employee-slider-three__slider')) {
+		new Swiper('.employee-slider-three__slider', {
+			modules: [Navigation],
+			observer: true,
+			observeParents: true,
+			slidesPerView: "auto",
+			spaceBetween: 14,
+			// autoHeight: true,
+			speed: 500,
+			navigation: {
+				prevEl: '.employee-slider-three__slider .swiper-button-prev',
+				nextEl: '.employee-slider-three__slider .swiper-button-next',
+			},
 			on: {
 
 			}
