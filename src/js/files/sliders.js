@@ -155,7 +155,7 @@ function initSliders() {
 			observeParents: true,
 			slidesPerView: "auto",
 			spaceBetween: 14,
-			autoHeight: true,
+			// autoHeight: true,
 			speed: 500,
 			// freeMode: true,
 			//loop: true,
@@ -163,28 +163,14 @@ function initSliders() {
 				prevEl: '.employee-slider-one__slider .swiper-button-prev',
 				nextEl: '.employee-slider-one__slider .swiper-button-next',
 			},
-			/*
-			// Брейкпоінти
-			breakpoints: {
-				640: {
-					slidesPerView: 1,
-					spaceBetween: 0,
-					autoHeight: true,
-				},
-				768: {
-					slidesPerView: 2,
-					spaceBetween: 20,
-				},
-				992: {
-					slidesPerView: 3,
-					spaceBetween: 20,
-				},
-				1268: {
-					slidesPerView: 4,
-					spaceBetween: 30,
-				},
-			},
-			*/
+			// breakpoints: {
+			// 	300: {
+			// 		slidesPerView: 2,
+			// 	},
+			// 	1280: {
+			// 		slidesPerView: "auto",
+			// 	},
+			// },
 			// Події
 			on: {
 

@@ -5,6 +5,9 @@
 // #1C142B - main
 // filter: invert(8%) sepia(10%) saturate(4100%) hue-rotate(222deg) brightness(88%) contrast(96%);
 
+// #ffffff
+// filter: invert(100%) sepia(0%) saturate(0%) hue-rotate(157deg) brightness(111%) contrast(102%);
+
 .main-title {
   @include adaptiveValue("font-size", 55, 30,0,1920,480);
   font-weight: 500;

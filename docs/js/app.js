@@ -4170,7 +4170,6 @@
                 observeParents: true,
                 slidesPerView: "auto",
                 spaceBetween: 14,
-                autoHeight: true,
                 speed: 500,
                 navigation: {
                     prevEl: ".employee-slider-one__slider .swiper-button-prev",
