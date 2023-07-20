@@ -21,3 +21,10 @@
     font-weight: 600;
   }
 }
+
+summary {
+  list-style: none;
+  &::-webkit-details-marker {
+    display: none;
+  }
+}

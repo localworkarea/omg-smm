@@ -310,6 +310,9 @@
                 }), duration);
             }
         };
+        let _slideToggle = (target, duration = 500) => {
+            if (target.hidden) return _slideDown(target, duration); else return _slideUp(target, duration);
+        };
         let bodyLockStatus = true;
         let bodyLockToggle = (delay = 500) => {
             if (document.documentElement.classList.contains("lock")) bodyUnlock(delay); else bodyLock(delay);
@@ -348,6 +351,115 @@
                 }), delay);
             }
         };
+        function spollers() {
+            const spollersArray = document.querySelectorAll("[data-spollers]");
+            if (spollersArray.length > 0) {
+                document.addEventListener("click", setSpollerAction);
+                const spollersRegular = Array.from(spollersArray).filter((function(item, index, self) {
+                    return !item.dataset.spollers.split(",")[0];
+                }));
+                if (spollersRegular.length) initSpollers(spollersRegular);
+                let mdQueriesArray = dataMediaQueries(spollersArray, "spollers");
+                if (mdQueriesArray && mdQueriesArray.length) mdQueriesArray.forEach((mdQueriesItem => {
+                    mdQueriesItem.matchMedia.addEventListener("change", (function() {
+                        initSpollers(mdQueriesItem.itemsArray, mdQueriesItem.matchMedia);
+                    }));
+                    initSpollers(mdQueriesItem.itemsArray, mdQueriesItem.matchMedia);
+                }));
+                function initSpollers(spollersArray, matchMedia = false) {
+                    spollersArray.forEach((spollersBlock => {
+                        spollersBlock = matchMedia ? spollersBlock.item : spollersBlock;
+                        if (matchMedia.matches || !matchMedia) {
+                            spollersBlock.classList.add("_spoller-init");
+                            initSpollerBody(spollersBlock);
+                        } else {
+                            spollersBlock.classList.remove("_spoller-init");
+                            initSpollerBody(spollersBlock, false);
+                        }
+                    }));
+                }
+                function initSpollerBody(spollersBlock, hideSpollerBody = true) {
+                    let spollerItems = spollersBlock.querySelectorAll("details");
+                    if (spollerItems.length) {
+                        spollerItems = Array.from(spollerItems).filter((item => item.closest("[data-spollers]") === spollersBlock));
+                        spollerItems.forEach((spollerItem => {
+                            let spollerTitle = spollerItem.querySelector("summary");
+                            if (hideSpollerBody) {
+                                spollerTitle.removeAttribute("tabindex");
+                                if (!spollerItem.hasAttribute("data-open")) {
+                                    spollerItem.open = false;
+                                    spollerTitle.nextElementSibling.hidden = true;
+                                } else {
+                                    spollerTitle.classList.add("_spoller-active");
+                                    spollerItem.open = true;
+                                }
+                            } else {
+                                spollerTitle.setAttribute("tabindex", "-1");
+                                spollerTitle.classList.remove("_spoller-active");
+                                spollerItem.open = true;
+                                spollerTitle.nextElementSibling.hidden = false;
+                            }
+                        }));
+                    }
+                }
+                function setSpollerAction(e) {
+                    const el = e.target;
+                    if (el.closest("summary") && el.closest("[data-spollers]").classList.contains("_spoller-init")) {
+                        const spollerTitle = el.closest("summary");
+                        const spollerBlock = spollerTitle.closest("details");
+                        const spollersBlock = spollerTitle.closest("[data-spollers]");
+                        const oneSpoller = spollersBlock.hasAttribute("data-one-spoller");
+                        const scrollSpoller = spollerBlock.hasAttribute("data-spoller-scroll");
+                        const spollerSpeed = spollersBlock.dataset.spollersSpeed ? parseInt(spollersBlock.dataset.spollersSpeed) : 500;
+                        if (!spollersBlock.querySelectorAll("._slide").length) {
+                            if (oneSpoller && !spollerBlock.open) hideSpollersBody(spollersBlock);
+                            !spollerBlock.open ? spollerBlock.open = true : setTimeout((() => {
+                                spollerBlock.open = false;
+                            }), spollerSpeed);
+                            spollerTitle.classList.toggle("_spoller-active");
+                            _slideToggle(spollerTitle.nextElementSibling, spollerSpeed);
+                            if (scrollSpoller && spollerTitle.classList.contains("_spoller-active")) {
+                                const scrollSpollerValue = spollerBlock.dataset.spollerScroll;
+                                const scrollSpollerOffset = +scrollSpollerValue ? +scrollSpollerValue : 0;
+                                const scrollSpollerNoHeader = spollerBlock.hasAttribute("data-spoller-scroll-noheader") ? document.querySelector(".header").offsetHeight : 0;
+                                window.scrollTo({
+                                    top: spollerBlock.offsetTop - (scrollSpollerOffset + scrollSpollerNoHeader),
+                                    behavior: "smooth"
+                                });
+                            }
+                        }
+                        e.preventDefault();
+                    }
+                    if (!el.closest("[data-spollers]")) {
+                        const spollersClose = document.querySelectorAll("[data-spoller-close]");
+                        if (spollersClose.length) spollersClose.forEach((spollerClose => {
+                            const spollersBlock = spollerClose.closest("[data-spollers]");
+                            const spollerCloseBlock = spollerClose.parentNode;
+                            if (spollersBlock.classList.contains("_spoller-init")) {
+                                const spollerSpeed = spollersBlock.dataset.spollersSpeed ? parseInt(spollersBlock.dataset.spollersSpeed) : 500;
+                                spollerClose.classList.remove("_spoller-active");
+                                _slideUp(spollerClose.nextElementSibling, spollerSpeed);
+                                setTimeout((() => {
+                                    spollerCloseBlock.open = false;
+                                }), spollerSpeed);
+                            }
+                        }));
+                    }
+                }
+                function hideSpollersBody(spollersBlock) {
+                    const spollerActiveBlock = spollersBlock.querySelector("details[open]");
+                    if (spollerActiveBlock && !spollersBlock.querySelectorAll("._slide").length) {
+                        const spollerActiveTitle = spollerActiveBlock.querySelector("summary");
+                        const spollerSpeed = spollersBlock.dataset.spollersSpeed ? parseInt(spollersBlock.dataset.spollersSpeed) : 500;
+                        spollerActiveTitle.classList.remove("_spoller-active");
+                        _slideUp(spollerActiveTitle.nextElementSibling, spollerSpeed);
+                        setTimeout((() => {
+                            spollerActiveBlock.open = false;
+                        }), spollerSpeed);
+                    }
+                }
+            }
+        }
         function tabs() {
             const tabs = document.querySelectorAll("[data-tabs]");
             let tabsActiveHash = [];
@@ -842,6 +954,20 @@
             const el = document.createElement(tag);
             el.classList.add(...Array.isArray(classes) ? classes : [ classes ]);
             return el;
+        }
+        function utils_elementOffset(el) {
+            const window = ssr_window_esm_getWindow();
+            const document = ssr_window_esm_getDocument();
+            const box = el.getBoundingClientRect();
+            const body = document.body;
+            const clientTop = el.clientTop || body.clientTop || 0;
+            const clientLeft = el.clientLeft || body.clientLeft || 0;
+            const scrollTop = el === window ? window.scrollY : el.scrollTop;
+            const scrollLeft = el === window ? window.scrollX : el.scrollLeft;
+            return {
+                top: box.top + scrollTop - clientTop,
+                left: box.left + scrollLeft - clientLeft
+            };
         }
         function elementPrevAll(el, selector) {
             const prevEls = [];
@@ -2898,7 +3024,7 @@
             classes
         };
         const extendedDefaults = {};
-        class swiper_core_Swiper {
+        class Swiper {
             constructor() {
                 let el;
                 let params;
@@ -2914,7 +3040,7 @@
                         const newParams = utils_extend({}, params, {
                             el: containerEl
                         });
-                        swipers.push(new swiper_core_Swiper(newParams));
+                        swipers.push(new Swiper(newParams));
                     }));
                     return swipers;
                 }
@@ -3269,25 +3395,109 @@
                 return defaults;
             }
             static installModule(mod) {
-                if (!swiper_core_Swiper.prototype.__modules__) swiper_core_Swiper.prototype.__modules__ = [];
-                const modules = swiper_core_Swiper.prototype.__modules__;
+                if (!Swiper.prototype.__modules__) Swiper.prototype.__modules__ = [];
+                const modules = Swiper.prototype.__modules__;
                 if (typeof mod === "function" && modules.indexOf(mod) < 0) modules.push(mod);
             }
             static use(module) {
                 if (Array.isArray(module)) {
-                    module.forEach((m => swiper_core_Swiper.installModule(m)));
-                    return swiper_core_Swiper;
+                    module.forEach((m => Swiper.installModule(m)));
+                    return Swiper;
                 }
-                swiper_core_Swiper.installModule(module);
-                return swiper_core_Swiper;
+                Swiper.installModule(module);
+                return Swiper;
             }
         }
         Object.keys(prototypes).forEach((prototypeGroup => {
             Object.keys(prototypes[prototypeGroup]).forEach((protoMethod => {
-                swiper_core_Swiper.prototype[protoMethod] = prototypes[prototypeGroup][protoMethod];
+                Swiper.prototype[protoMethod] = prototypes[prototypeGroup][protoMethod];
             }));
         }));
-        swiper_core_Swiper.use([ Resize, Observer ]);
+        Swiper.use([ Resize, Observer ]);
+        function Keyboard(_ref) {
+            let {swiper, extendParams, on, emit} = _ref;
+            const document = ssr_window_esm_getDocument();
+            const window = ssr_window_esm_getWindow();
+            swiper.keyboard = {
+                enabled: false
+            };
+            extendParams({
+                keyboard: {
+                    enabled: false,
+                    onlyInViewport: true,
+                    pageUpDown: true
+                }
+            });
+            function handle(event) {
+                if (!swiper.enabled) return;
+                const {rtlTranslate: rtl} = swiper;
+                let e = event;
+                if (e.originalEvent) e = e.originalEvent;
+                const kc = e.keyCode || e.charCode;
+                const pageUpDown = swiper.params.keyboard.pageUpDown;
+                const isPageUp = pageUpDown && kc === 33;
+                const isPageDown = pageUpDown && kc === 34;
+                const isArrowLeft = kc === 37;
+                const isArrowRight = kc === 39;
+                const isArrowUp = kc === 38;
+                const isArrowDown = kc === 40;
+                if (!swiper.allowSlideNext && (swiper.isHorizontal() && isArrowRight || swiper.isVertical() && isArrowDown || isPageDown)) return false;
+                if (!swiper.allowSlidePrev && (swiper.isHorizontal() && isArrowLeft || swiper.isVertical() && isArrowUp || isPageUp)) return false;
+                if (e.shiftKey || e.altKey || e.ctrlKey || e.metaKey) return;
+                if (document.activeElement && document.activeElement.nodeName && (document.activeElement.nodeName.toLowerCase() === "input" || document.activeElement.nodeName.toLowerCase() === "textarea")) return;
+                if (swiper.params.keyboard.onlyInViewport && (isPageUp || isPageDown || isArrowLeft || isArrowRight || isArrowUp || isArrowDown)) {
+                    let inView = false;
+                    if (utils_elementParents(swiper.el, `.${swiper.params.slideClass}, swiper-slide`).length > 0 && utils_elementParents(swiper.el, `.${swiper.params.slideActiveClass}`).length === 0) return;
+                    const el = swiper.el;
+                    const swiperWidth = el.clientWidth;
+                    const swiperHeight = el.clientHeight;
+                    const windowWidth = window.innerWidth;
+                    const windowHeight = window.innerHeight;
+                    const swiperOffset = utils_elementOffset(el);
+                    if (rtl) swiperOffset.left -= el.scrollLeft;
+                    const swiperCoord = [ [ swiperOffset.left, swiperOffset.top ], [ swiperOffset.left + swiperWidth, swiperOffset.top ], [ swiperOffset.left, swiperOffset.top + swiperHeight ], [ swiperOffset.left + swiperWidth, swiperOffset.top + swiperHeight ] ];
+                    for (let i = 0; i < swiperCoord.length; i += 1) {
+                        const point = swiperCoord[i];
+                        if (point[0] >= 0 && point[0] <= windowWidth && point[1] >= 0 && point[1] <= windowHeight) {
+                            if (point[0] === 0 && point[1] === 0) continue;
+                            inView = true;
+                        }
+                    }
+                    if (!inView) return;
+                }
+                if (swiper.isHorizontal()) {
+                    if (isPageUp || isPageDown || isArrowLeft || isArrowRight) if (e.preventDefault) e.preventDefault(); else e.returnValue = false;
+                    if ((isPageDown || isArrowRight) && !rtl || (isPageUp || isArrowLeft) && rtl) swiper.slideNext();
+                    if ((isPageUp || isArrowLeft) && !rtl || (isPageDown || isArrowRight) && rtl) swiper.slidePrev();
+                } else {
+                    if (isPageUp || isPageDown || isArrowUp || isArrowDown) if (e.preventDefault) e.preventDefault(); else e.returnValue = false;
+                    if (isPageDown || isArrowDown) swiper.slideNext();
+                    if (isPageUp || isArrowUp) swiper.slidePrev();
+                }
+                emit("keyPress", kc);
+                return;
+            }
+            function enable() {
+                if (swiper.keyboard.enabled) return;
+                document.addEventListener("keydown", handle);
+                swiper.keyboard.enabled = true;
+            }
+            function disable() {
+                if (!swiper.keyboard.enabled) return;
+                document.removeEventListener("keydown", handle);
+                swiper.keyboard.enabled = false;
+            }
+            on("init", (() => {
+                if (swiper.params.keyboard.enabled) enable();
+            }));
+            on("destroy", (() => {
+                if (swiper.keyboard.enabled) disable();
+            }));
+            Object.assign(swiper.keyboard, {
+                enable,
+                disable
+            });
+        }
         function create_element_if_not_defined_createElementIfNotDefined(swiper, originalParams, params, checkProps) {
             if (swiper.params.createElements) Object.keys(checkProps).forEach((key => {
                 if (!params[key] && params.auto === true) {
@@ -3692,7 +3902,7 @@
         }
         function initSliders() {
             if (document.querySelector(".main__one-slider")) {
-                var swiperOne = new swiper_core_Swiper(".main__one-slider", {
+                var swiperOne = new Swiper(".main__one-slider", {
                     direction: "vertical",
                     modules: [ Autoplay ],
                     observer: true,
@@ -3725,7 +3935,7 @@
                 }));
             }
             if (document.querySelector(".main__two-slider")) {
-                var swiperTwo = new swiper_core_Swiper(".main__two-slider", {
+                var swiperTwo = new Swiper(".main__two-slider", {
                     direction: "vertical",
                     modules: [ Autoplay ],
                     observer: true,
@@ -3758,7 +3968,7 @@
                 }));
             }
             if (document.querySelector(".main__three-slider")) {
-                var swiperThree = new swiper_core_Swiper(".main__three-slider", {
+                var swiperThree = new Swiper(".main__three-slider", {
                     direction: "vertical",
                     modules: [ Autoplay ],
                     observer: true,
@@ -3795,7 +4005,7 @@
                     swiperThree.autoplay.start();
                 }));
             }
-            if (document.querySelector(".employee-slider-one__slider")) new swiper_core_Swiper(".employee-slider-one__slider", {
+            if (document.querySelector(".employee-slider-one__slider")) new Swiper(".employee-slider-one__slider", {
                 modules: [ Navigation ],
                 observer: true,
                 observeParents: true,
@@ -3808,7 +4018,7 @@
                 },
                 on: {}
             });
-            if (document.querySelector(".employee-slider-two__slider")) new swiper_core_Swiper(".employee-slider-two__slider", {
+            if (document.querySelector(".employee-slider-two__slider")) new Swiper(".employee-slider-two__slider", {
                 modules: [ Navigation ],
                 observer: true,
                 observeParents: true,
@@ -3821,7 +4031,7 @@
                 },
                 on: {}
             });
-            if (document.querySelector(".employee-slider-three__slider")) new swiper_core_Swiper(".employee-slider-three__slider", {
+            if (document.querySelector(".employee-slider-three__slider")) new Swiper(".employee-slider-three__slider", {
                 modules: [ Navigation ],
                 observer: true,
                 observeParents: true,
@@ -3834,10 +4044,161 @@
                 },
                 on: {}
             });
+            if (document.querySelector(".blog__slider")) new Swiper(".blog__slider", {
+                modules: [ Navigation, Keyboard ],
+                observer: true,
+                observeParents: true,
+                spaceBetween: "-20",
+                slidesPerView: 3,
+                loop: true,
+                centeredSlides: true,
+                speed: 800,
+                slideToClickedSlide: true,
+                keyboard: {
+                    enabled: true,
+                    onlyInViewport: true
+                },
+                navigation: {
+                    prevEl: ".blog__slider .swiper-button-prev",
+                    nextEl: ".blog__slider .swiper-button-next"
+                },
+                breakpoints: {
+                    320: {
+                        centeredSlides: false,
+                        slidesPerView: 2
+                    },
+                    481: {
+                        centeredSlides: true
+                    },
+                    1151: {}
+                },
+                on: {}
+            });
+            if (document.querySelector(".cases-slider__slider")) new Swiper(".cases-slider__slider", {
+                modules: [ Navigation ],
+                observer: true,
+                observeParents: true,
+                slidesPerView: 3,
+                spaceBetween: 20,
+                speed: 800,
+                navigation: {
+                    prevEl: ".cases-slider__slider .swiper-button-prev",
+                    nextEl: ".cases-slider__slider .swiper-button-next"
+                },
+                breakpoints: {
+                    320: {
+                        slidesPerView: 1
+                    },
+                    600: {
+                        slidesPerView: 1.5
+                    },
+                    769: {
+                        slidesPerView: 2
+                    },
+                    1150: {
+                        slidesPerView: 3
+                    }
+                },
+                on: {}
+            });
         }
         window.addEventListener("load", (function(e) {
             initSliders();
         }));
+        class ScrollWatcher {
+            constructor(props) {
+                let defaultConfig = {
+                    logging: true
+                };
+                this.config = Object.assign(defaultConfig, props);
+                this.observer;
+                !document.documentElement.classList.contains("watcher") ? this.scrollWatcherRun() : null;
+            }
+            scrollWatcherUpdate() {
+                this.scrollWatcherRun();
+            }
+            scrollWatcherRun() {
+                document.documentElement.classList.add("watcher");
+                this.scrollWatcherConstructor(document.querySelectorAll("[data-watch]"));
+            }
+            scrollWatcherConstructor(items) {
+                if (items.length) {
+                    this.scrollWatcherLogging(`Прокинувся, стежу за об'єктами (${items.length})...`);
+                    let uniqParams = uniqArray(Array.from(items).map((function(item) {
+                        return `${item.dataset.watchRoot ? item.dataset.watchRoot : null}|${item.dataset.watchMargin ? item.dataset.watchMargin : "0px"}|${item.dataset.watchThreshold ? item.dataset.watchThreshold : 0}`;
+                    })));
+                    uniqParams.forEach((uniqParam => {
+                        let uniqParamArray = uniqParam.split("|");
+                        let paramsWatch = {
+                            root: uniqParamArray[0],
+                            margin: uniqParamArray[1],
+                            threshold: uniqParamArray[2]
+                        };
+                        let groupItems = Array.from(items).filter((function(item) {
+                            let watchRoot = item.dataset.watchRoot ? item.dataset.watchRoot : null;
+                            let watchMargin = item.dataset.watchMargin ? item.dataset.watchMargin : "0px";
+                            let watchThreshold = item.dataset.watchThreshold ? item.dataset.watchThreshold : 0;
+                            if (String(watchRoot) === paramsWatch.root && String(watchMargin) === paramsWatch.margin && String(watchThreshold) === paramsWatch.threshold) return item;
+                        }));
+                        let configWatcher = this.getScrollWatcherConfig(paramsWatch);
+                        this.scrollWatcherInit(groupItems, configWatcher);
+                    }));
+                } else this.scrollWatcherLogging("Сплю, немає об'єктів для стеження. ZzzZZzz");
+            }
+            getScrollWatcherConfig(paramsWatch) {
+                let configWatcher = {};
+                if (document.querySelector(paramsWatch.root)) configWatcher.root = document.querySelector(paramsWatch.root); else if (paramsWatch.root !== "null") this.scrollWatcherLogging(`Эмм... батьківського об'єкта ${paramsWatch.root} немає на сторінці`);
+                configWatcher.rootMargin = paramsWatch.margin;
+                if (paramsWatch.margin.indexOf("px") < 0 && paramsWatch.margin.indexOf("%") < 0) {
+                    this.scrollWatcherLogging(`йой, налаштування data-watch-margin потрібно задавати в PX або %`);
+                    return;
+                }
+                if (paramsWatch.threshold === "prx") {
+                    paramsWatch.threshold = [];
+                    for (let i = 0; i <= 1; i += .005) paramsWatch.threshold.push(i);
+                } else paramsWatch.threshold = paramsWatch.threshold.split(",");
+                configWatcher.threshold = paramsWatch.threshold;
+                return configWatcher;
+            }
+            scrollWatcherCreate(configWatcher) {
+                this.observer = new IntersectionObserver(((entries, observer) => {
+                    entries.forEach((entry => {
+                        this.scrollWatcherCallback(entry, observer);
+                    }));
+                }), configWatcher);
+            }
+            scrollWatcherInit(items, configWatcher) {
+                this.scrollWatcherCreate(configWatcher);
+                items.forEach((item => this.observer.observe(item)));
+            }
+            scrollWatcherIntersecting(entry, targetElement) {
+                if (entry.isIntersecting) {
+                    !targetElement.classList.contains("_watcher-view") ? targetElement.classList.add("_watcher-view") : null;
+                    this.scrollWatcherLogging(`Я бачу ${targetElement.classList}, додав клас _watcher-view`);
+                } else {
+                    targetElement.classList.contains("_watcher-view") ? targetElement.classList.remove("_watcher-view") : null;
+                    this.scrollWatcherLogging(`Я не бачу ${targetElement.classList}, прибрав клас _watcher-view`);
+                }
+            }
+            scrollWatcherOff(targetElement, observer) {
+                observer.unobserve(targetElement);
+                this.scrollWatcherLogging(`Я перестав стежити за ${targetElement.classList}`);
+            }
+            scrollWatcherLogging(message) {
+                this.config.logging ? functions_FLS(`[Спостерігач]: ${message}`) : null;
+            }
+            scrollWatcherCallback(entry, observer) {
+                const targetElement = entry.target;
+                this.scrollWatcherIntersecting(entry, targetElement);
+                targetElement.hasAttribute("data-watch-once") && entry.isIntersecting ? this.scrollWatcherOff(targetElement, observer) : null;
+                document.dispatchEvent(new CustomEvent("watcherCallback", {
+                    detail: {
+                        entry
+                    }
+                }));
+            }
+        }
+        modules_flsModules.watcher = new ScrollWatcher({});
         let addWindowScrollEvent = false;
         function pageNavigation() {
             document.addEventListener("click", pageNavigationAction);
@@ -3883,6 +4244,37 @@
                 if (document.querySelector(`#${getHash()}`)) goToHash = `#${getHash()}`; else if (document.querySelector(`.${getHash()}`)) goToHash = `.${getHash()}`;
                 goToHash ? gotoblock_gotoBlock(goToHash, true, 500, 20) : null;
             }
+        }
+        function digitsCounter() {
+            if (document.querySelectorAll("[data-digits-counter]").length) document.querySelectorAll("[data-digits-counter]").forEach((element => {
+                element.dataset.digitsCounter = element.innerHTML;
+                element.innerHTML = `0`;
+            }));
+            function digitsCountersInit(digitsCountersItems) {
+                let digitsCounters = digitsCountersItems ? digitsCountersItems : document.querySelectorAll("[data-digits-counter]");
+                if (digitsCounters.length) digitsCounters.forEach((digitsCounter => {
+                    digitsCountersAnimate(digitsCounter);
+                }));
+            }
+            function digitsCountersAnimate(digitsCounter) {
+                let startTimestamp = null;
+                const duration = parseInt(digitsCounter.dataset.digitsCounterSpeed) ? parseInt(digitsCounter.dataset.digitsCounterSpeed) : 1e3;
+                const startValue = parseInt(digitsCounter.dataset.digitsCounter);
+                const startPosition = 0;
+                const step = timestamp => {
+                    if (!startTimestamp) startTimestamp = timestamp;
+                    const progress = Math.min((timestamp - startTimestamp) / duration, 1);
+                    digitsCounter.innerHTML = Math.floor(progress * (startPosition + startValue));
+                    if (progress < 1) window.requestAnimationFrame(step);
+                };
+                window.requestAnimationFrame(step);
+            }
+            function digitsCounterAction(e) {
+                const entry = e.detail.entry;
+                const targetElement = entry.target;
+                if (targetElement.querySelectorAll("[data-digits-counter]").length) digitsCountersInit(targetElement.querySelectorAll("[data-digits-counter]"));
+            }
+            document.addEventListener("watcherCallback", digitsCounterAction);
         }
         setTimeout((() => {
             if (addWindowScrollEvent) {
@@ -3981,7 +4373,9 @@
         addTouchClass();
         addLoadedClass();
         menuInit();
+        spollers();
         tabs();
         pageNavigation();
+        digitsCounter();
     })();
 })();

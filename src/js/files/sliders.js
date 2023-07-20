@@ -8,7 +8,7 @@
 // При необхідності підключаємо додаткові модулі слайдера, вказуючи їх у {} через кому
 // Приклад: { Navigation, Autoplay }
 import Swiper from 'swiper';
-import { Navigation, Autoplay } from 'swiper/modules';
+import { Navigation, Autoplay,Keyboard } from 'swiper/modules';
 
 // Swiper.use([Navigation, Autoplay]);
 /*
@@ -200,35 +200,104 @@ function initSliders() {
 			}
 		});
 	}
-}
-// Скролл на базі слайдера (за класом swiper scroll для оболонки слайдера)
-function initSlidersScroll() {
-	let sliderScrollItems = document.querySelectorAll('.swiper_scroll');
-	if (sliderScrollItems.length > 0) {
-		for (let index = 0; index < sliderScrollItems.length; index++) {
-			const sliderScrollItem = sliderScrollItems[index];
-			const sliderScrollBar = sliderScrollItem.querySelector('.swiper-scrollbar');
-			const sliderScroll = new Swiper(sliderScrollItem, {
-				observer: true,
-				observeParents: true,
-				direction: 'vertical',
-				slidesPerView: 'auto',
-				freeMode: {
-					enabled: true,
+
+	if (document.querySelector('.blog__slider')) {
+		new Swiper('.blog__slider', {
+			modules: [Navigation,Keyboard],
+			observer: true,
+			observeParents: true,
+			spaceBetween: "-20",
+			slidesPerView: 3,
+			loop: true,
+			centeredSlides: true,
+			speed: 800,
+			slideToClickedSlide: true,
+			keyboard: {
+				enabled: true,
+				onlyInViewport: true,
+			},
+			navigation: {
+				prevEl: '.blog__slider .swiper-button-prev',
+				nextEl: '.blog__slider .swiper-button-next',
+			},
+			breakpoints: {
+				320: {
+					centeredSlides: false,
+					slidesPerView: 2,
+					// spaceBetween: 0,
+
 				},
-				scrollbar: {
-					el: sliderScrollBar,
-					draggable: true,
-					snapOnRelease: false
+				481: {
+					centeredSlides: true,
 				},
-				mousewheel: {
-					releaseOnEdges: true,
+				1151: {
 				},
-			});
-			sliderScroll.scrollbar.updateSize();
-		}
+			},
+			on: {
+
+			}
+		});
+	}
+	if (document.querySelector('.cases-slider__slider')) {
+		new Swiper('.cases-slider__slider', {
+			modules: [Navigation],
+			observer: true,
+			observeParents: true,
+			slidesPerView: 3,
+			spaceBetween: 20,
+			speed: 800,
+			navigation: {
+				prevEl: '.cases-slider__slider .swiper-button-prev',
+				nextEl: '.cases-slider__slider .swiper-button-next',
+			},
+			breakpoints: {
+				320: {
+					slidesPerView: 1,
+				},
+				600: {
+					slidesPerView: 1.5,
+				},
+				769: {
+					slidesPerView: 2,
+				},
+				1150: {
+					slidesPerView: 3,
+				}
+			},
+			on: {
+
+			}
+		});
 	}
 }
+// Скролл на базі слайдера (за класом swiper scroll для оболонки слайдера)
+// function initSlidersScroll() {
+// 	let sliderScrollItems = document.querySelectorAll('.swiper_scroll');
+// 	if (sliderScrollItems.length > 0) {
+// 		for (let index = 0; index < sliderScrollItems.length; index++) {
+// 			const sliderScrollItem = sliderScrollItems[index];
+// 			const sliderScrollBar = sliderScrollItem.querySelector('.swiper-scrollbar');
+// 			const sliderScroll = new Swiper(sliderScrollItem, {
+// 				observer: true,
+// 				observeParents: true,
+// 				direction: 'vertical',
+// 				slidesPerView: 'auto',
+// 				freeMode: {
+// 					enabled: true,
+// 				},
+// 				scrollbar: {
+// 					el: sliderScrollBar,
+// 					draggable: true,
+// 					snapOnRelease: false
+// 				},
+// 				mousewheel: {
+// 					releaseOnEdges: true,
+// 				},
+// 			});
+// 			sliderScroll.scrollbar.updateSize();
+// 		}
+// 	}
+// }
 
 window.addEventListener("load", function (e) {
 	// Запуск ініціалізації слайдерів

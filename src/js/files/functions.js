@@ -423,12 +423,15 @@ export function tabs() {
 				tabActiveTitle.length ? tabActiveTitle = Array.from(tabActiveTitle).filter(item => item.closest('[data-tabs]') === tabsBlock) : null;
 				tabActiveTitle.length ? tabActiveTitle[0].classList.remove('_tab-active') : null;
 				tabTitle.classList.add('_tab-active');
-				setTabsStatus(tabsBlock);
+
+					setTabsStatus(tabsBlock);
 			}
+
 			e.preventDefault();
 		}
 	}
 }
+
 // Модуль роботи з меню (бургер) =======================================================================================================================================================================================================================
 export function menuInit() {
 	if (document.querySelector(".icon-menu")) {
