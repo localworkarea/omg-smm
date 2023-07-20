@@ -1223,6 +1223,7 @@ summary::-webkit-details-marker {
   height: auto;
   -webkit-filter: invert(95%) sepia(8%) saturate(2261%) hue-rotate(27deg) brightness(106%) contrast(102%);
           filter: invert(95%) sepia(8%) saturate(2261%) hue-rotate(27deg) brightness(106%) contrast(102%);
+  width: 4.6875rem;
 }
 
 .blog__btn:hover {
@@ -2495,10 +2496,6 @@ summary::-webkit-details-marker {
     height: 43.875rem;
   }
 
-  .blog__btn img {
-    width: 4.6875rem;
-  }
-
   .blog__link {
     font-size: 2.0625rem;
   }
@@ -2803,10 +2800,6 @@ summary::-webkit-details-marker {
 
   .blog__slider {
     height: 25.125rem;
-  }
-
-  .blog__btn img {
-    width: 1.875rem;
   }
 
   .tab-services-sec__sub-txt::before {
@@ -3181,13 +3174,13 @@ summary::-webkit-details-marker {
         -ms-transform: translateX(30px);
             transform: translateX(30px);
   }
-}
 
-@media (max-width: 68.75em) {
   .blog__btn img {
     width: 4.0625rem;
   }
+}
 
+@media (max-width: 68.75em) {
   .blog__btn.swiper-button-prev {
     left: -3.75rem;
   }
@@ -3637,6 +3630,10 @@ summary::-webkit-details-marker {
     -webkit-transform: unset;
         -ms-transform: unset;
             transform: unset;
+  }
+
+  .blog__btn img {
+    width: 1.875rem;
   }
 
   .blog__link-body {
@@ -5493,34 +5490,6 @@ summary::-webkit-details-marker {
 @supports not (width: clamp( 17.5rem , -2.5rem  +  100vw , 27.5rem )) {
     .blog__slider {
       width: calc(17.5rem + 10 * (100vw - 20rem) / 10);
-    }
-}
-}
-
-@media (min-width: 68.75em) and (max-width: 120em) {
-@supports (width: clamp( 4.0625rem , 3.2240853659rem  +  1.2195121951vw , 4.6875rem )) {
-    .blog__btn img {
-      width: clamp( 4.0625rem , 3.2240853659rem  +  1.2195121951vw , 4.6875rem );
-    }
-}
-
-@supports not (width: clamp( 4.0625rem , 3.2240853659rem  +  1.2195121951vw , 4.6875rem )) {
-    .blog__btn img {
-      width: calc(4.0625rem + 0.625 * (100vw - 68.75rem) / 51.25);
-    }
-}
-}
-
-@media (min-width: 48em) and (max-width: 68.75em) {
-@supports (width: clamp( 1.875rem , -3.1852409639rem  +  10.5421686747vw , 4.0625rem )) {
-    .blog__btn img {
-      width: clamp( 1.875rem , -3.1852409639rem  +  10.5421686747vw , 4.0625rem );
-    }
-}
-
-@supports not (width: clamp( 1.875rem , -3.1852409639rem  +  10.5421686747vw , 4.0625rem )) {
-    .blog__btn img {
-      width: calc(1.875rem + 2.1875 * (100vw - 48rem) / 20.75);
     }
 }
 }

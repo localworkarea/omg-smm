@@ -1236,10 +1236,15 @@
     pointer-events: all;
     transition: all .3s ease;
     img {
-      @include adaptiveValue("width", 75, 65,0,1920,1100);
-      @include adaptiveValue("width", 65, 30,3,1100,768);
       height: auto;
       filter: invert(95%) sepia(8%) saturate(2261%) hue-rotate(27deg) brightness(106%) contrast(102%);
+      width: rem(75);
+      @media (max-width: em(1100.98)){
+          width: rem(65);
+      }
+      @media (max-width:$mobile){
+         width: rem(30); 
+      }
     }
     &:hover {
       opacity: 0.6;
