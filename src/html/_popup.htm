@@ -1,4 +1,35 @@
-<div id="popup" aria-hidden="true" class="popup">
+<div id="popupInvite" aria-hidden="true" class="popup">
+	<div class="popup__wrapper">
+		<div class="popup__content">
+			<button data-close type="button" class="popup__close"></button>
+			<form class="forms__form form" data-dev data-popup-message="#form-message" action="" method="POST">
+				<div class="form__input-wrapper">
+					<input required type="text" name="name" placeholder="Ім'я" class="form__input input">
+					<input required type="text" name="company" placeholder="Компанія" class="form__input input">
+					<input required type="email" name="email" placeholder="Пошта" class="form__input input">
+					<input required type="tel" name="tel" data-inputmask="'mask': '+38 (099) 999 99 99'" placeholder="+38 (0__) ___ __ __" class="form__input input">
+				</div>
+				<textarea name="message" class="form__textarea input" placeholder="Кілька слів про проєкт" data-autoheight required></textarea>
+				<div class="form__brief brief">
+					<div class="brief__file file">
+							<input id="formImage" accept="" type="file" name="image" class="file__input">
+							<div class="file__button">
+								<img src="@img/icons/attach_file_dark.svg" alt="attach file">
+								<span class="file__button-text">Завантажити бриф</span>
+								<div id="formPreview" class="file__preview"></div>
+							</div>
+					</div>
+					<input type="url" name="url" placeholder="або залишити посилання" class="brief__input input">
+				</div>
+				<div class="form__submit-wrap">
+					<button type="submit" class="form__submit btn">Відправити</button>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>
+
+<div id="popupMessageSent" aria-hidden="true" class="popup">
 	<div class="popup__wrapper">
 		<div class="popup__content">
 			<button data-close type="button" class="popup__close">Закрити</button>

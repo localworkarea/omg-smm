@@ -1,3 +1,106 @@
-//====================================================================================================
+.footer {
+  background-color: #000;
+  padding-top: rem(40);
+  padding-bottom: rem(70);
+  border: rem(1) solid $secondColor;
+  @media (max-width: em(600.98)){
+      border: unset;
+  }
+  // .footer__container
+  &__container {
+  }
+  // .footer__top
+  &__top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    @include adaptiveValue("padding-bottom", 60, 34,0,1920,480);
+    border-bottom: rem(1) solid rgba(255, 255, 255, 0.4);
+    @media (max-width: em(600.98)){
+        flex-direction: column;
+        row-gap: rem(40);
+    }
+  }
+  // .footer__bottom
+  &__bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    @include adaptiveValue("padding-top", 40, 34,0,1920,480);
+    @media (max-width: em(600.98)){
+        flex-direction: column;
+        row-gap: rem(15);
+    }
+  }
+  // .footer__logo
+  &__logo {
+    display: inline-block;
+    width: rem(99);
+    height: auto;
+  }
+  // .footer__top-right
+  &__top-right {
+    display: flex;
+    align-items: center;
+    column-gap: rem(45);
+    @media (max-width:$mobile){
+       flex-direction: column-reverse; 
+       row-gap: rem(30);
+    }
+    @media (max-width: em(600.98)){
+        row-gap: rem(68);
+    }
+  }
+  // .footer__btn-wrap
+  &__btn-wrap {
+  }
+  // .footer__btn
+  &__btn {
+		width: rem(300);
+		@media (max-width:$mobileSmall){
+      width: rem(250);
+		}
+  }
+  // .footer__social
+  &__social {
+  }
+  // .footer__rights
+  &__rights {
+  }
+  // .footer__txt-gray
+  &__txt-gray {
+    color: #FFF;
+    opacity: 0.5;
+    font-size: rem(17);
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    @media (max-width:$mobileSmall){
+       text-align: center; 
+    }
+  }
+  // .footer__policy
+  &__policy {
+  }
+}
 
-//====================================================================================================
+.social-footer {
+  display: flex;
+  align-items: center;
+  column-gap: rem(20);
+  // .social-footer__item
+  &__item {
+    display: block;
+    cursor: pointer;
+    transition: all .3s ease;
+    img {
+      width: rem(34);
+      height: auto;
+    }
+    @media (any-hover: hover){
+      &:hover{
+        opacity: 0.6;
+      }
+    }
+  }
+}

@@ -10,7 +10,7 @@
 			opacity: 0;
 		}
 	</style>
-	<link rel="stylesheet" href="css/style.min.css?_v=20230721010132">
+	<link rel="stylesheet" href="css/style.min.css?_v=20230721174920">
 	<link rel="shortcut icon" href="favicon.ico">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
@@ -25,14 +25,14 @@
 				<div class="header__menu menu">
 					<nav class="menu__body">
 						<ul class="menu__list">
-							<li class="menu__item"><a href="#" class="menu__link">Про OMG SMM</a></li>
+							<li class="menu__item"><a href="#" data-goto=".main" class="menu__link">Про OMG SMM</a></li>
 							<li class="menu__item"><a href="#" class="menu__link">Команда</a></li>
-							<li class="menu__item"><a href="#" class="menu__link">Послуги</a></li>
-							<li class="menu__item"><a href="#" class="menu__link">Кейси</a></li>
+							<li class="menu__item"><a href="#" data-goto=".services" class="menu__link">Послуги</a></li>
+							<li class="menu__item"><a href="#" data-goto=".cases" class="menu__link">Кейси</a></li>
 							<li class="menu__item"><a href="#" class="menu__link">Контакти</a></li>
 						</ul>
 					</nav>
-					<a href="#" class="menu__btn-link">Почати співпрацю</a>
+					<a href="#" data-goto=".forms" class="menu__btn-link">Почати співпрацю</a>
 				</div>
 				<button type="button" class="menu__icon icon-menu"><span></span></button>
 			</div>
@@ -1651,13 +1651,190 @@
 
 				</div>
 			</section>
+			<section class="forms">
+				<div class="forms__container">
+					<div class="forms__head">
+						<picture><source srcset="img/common/man-03.webp" type="image/webp"><img class="forms__img-man" src="img/common/man-03.png" alt="man"></picture>
+						<h2 class="forms__title main-title main-title_light">давайте<br> познайомимось</h2>
+						<img data-prlx-mouse data-prlx-cx="10" data-prlx-cy="10" data-prlx-a="50" class="forms__img-vector blur-vector" src="img/common/blur-vector-02.svg" alt="background">
+					</div>
+					<form class="forms__form form" data-dev data-popup-message="#form-message" action="" method="POST">
+						<div class="form__input-wrapper">
+							<input required type="text" name="name" placeholder="Ім'я" class="form__input input">
+							<input required type="text" name="company" placeholder="Компанія" class="form__input input">
+							<input required type="email" name="email" placeholder="Пошта" class="form__input input">
+							<input required type="tel" name="tel" data-inputmask="'mask': '+38 (099) 999 99 99'" placeholder="+38 (0__) ___ __ __" class="form__input input">
+						</div>
+						<fieldset class="form__options options">
+							<legend class="options__title">Оберіть які послуги вам необхідні:</legend>
+							<div class="options__body">
+								<div class="options__block">
+									<div class="options__checkbox checkbox">
+										<input id="c_1" class="checkbox__input" type="checkbox" value="SMM-стратегія" name="form[]">
+										<label for="c_1" class="checkbox__label">
+											<span class="checkbox__box">
+												<img src="img/icons/check.svg" alt="check">
+											</span>
+											<span class="checkbox__text">SMM-стратегія</span>
+										</label>
+									</div>
+									<div class="options__checkbox checkbox">
+										<input id="c_3" class="checkbox__input" type="checkbox" value="Таргетована реклама" name="form[]">
+										<label for="c_3" class="checkbox__label">
+											<span class="checkbox__box">
+												<img src="img/icons/check.svg" alt="check">
+											</span>
+											<span class="checkbox__text">Таргетована реклама</span>
+										</label>
+									</div>
+									<div class="options__checkbox checkbox">
+										<input id="c_5" class="checkbox__input" type="checkbox" value="Просування в TikTok" name="form[]">
+										<label for="c_5" class="checkbox__label">
+											<span class="checkbox__box">
+												<img src="img/icons/check.svg" alt="check">
+											</span>
+											<span class="checkbox__text">Просування в TikTok</span>
+										</label>
+									</div>
+									<div class="options__checkbox checkbox">
+										<input id="c_7" class="checkbox__input" type="checkbox" value="Запрошення в тендер" name="form[]">
+										<label for="c_7" class="checkbox__label">
+											<span class="checkbox__box">
+												<img src="img/icons/check.svg" alt="check">
+											</span>
+											<span class="checkbox__text">Запрошення в тендер</span>
+										</label>
+									</div>
+								</div>
+								<div class="options__block">
+									<div class="options__checkbox checkbox">
+										<input id="c_2" class="checkbox__input" type="checkbox" value="Дизайн для cоцмереж" name="form[]">
+										<label for="c_2" class="checkbox__label">
+											<span class="checkbox__box">
+												<img src="img/icons/check.svg" alt="check">
+											</span>
+											<span class="checkbox__text">Дизайн для cоцмереж</span>
+										</label>
+									</div>
+									<div class="options__checkbox checkbox">
+										<input id="c_4" class="checkbox__input" type="checkbox" value="Інфлюенс-маркетинг" name="form[]">
+										<label for="c_4" class="checkbox__label">
+											<span class="checkbox__box">
+												<img src="img/icons/check.svg" alt="check">
+											</span>
+											<span class="checkbox__text">Інфлюенс-маркетинг</span>
+										</label>
+									</div>
+									<div class="options__checkbox checkbox">
+										<input id="c_6" class="checkbox__input" type="checkbox" value="Комплексне ведення сторінок в Instagram та Facebook" name="form[]">
+										<label for="c_6" class="checkbox__label">
+											<span class="checkbox__box">
+												<img src="img/icons/check.svg" alt="check">
+											</span>
+											<span class="checkbox__text">Комплексне ведення сторінок в Instagram та Facebook</span>
+										</label>
+									</div>
+								</div>
+
+							</div>
+						</fieldset>
+						<textarea name="message" class="form__textarea input" placeholder="Кілька слів про проєкт" data-autoheight required></textarea>
+						<div class="form__brief brief">
+							<div class="brief__file file">
+								<input id="formImage" accept="" type="file" name="image" class="file__input">
+								<div class="file__button">
+									<img src="img/icons/attach_file.svg" alt="attach file">
+									<span class="file__button-text">Завантажити бриф</span>
+									<div id="formPreview" class="file__preview"></div>
+								</div>
+							</div>
+							<input type="url" name="url" placeholder="або залишити посилання" class="brief__input input">
+						</div>
+						<div class="form__submit-wrap">
+							<button type="submit" class="form__submit btn">Почати співпрацю</button>
+						</div>
+					</form>
+				</div>
+			</section>
 		</main>
 		<footer class="footer">
 			<div class="footer__container">
+				<div class="footer__top">
+					<a href="index.html" class="footer__logo">
+						<img src="img/icons/logo-light.svg" alt="logo">
+					</a>
+					<div class="footer__top-right">
+						<div class="footer__btn-wrap">
+							<button type="button" data-popup="#popupInvite" class="footer__btn btn">Запросити в тендер</button>
+						</div>
+						<div class="footer__social social-footer">
+							<a href="#" class="social-footer__item">
+								<img src="img/icons/social-face.svg" alt="facebook">
+							</a>
+							<a href="#" class="social-footer__item">
+								<img src="img/icons/social-inst.svg" alt="instagram">
+							</a>
+							<a href="#" class="social-footer__item">
+								<img src="img/icons/social-linkid.svg" alt="LinkedIn">
+							</a>
+							<a href="#" class="social-footer__item">
+								<img src="img/icons/social-teleg.svg" alt="Telegram">
+							</a>
+							<a href="#" class="social-footer__item">
+								<img src="img/icons/social-5.svg" alt="img">
+							</a>
+						</div>
+					</div>
+				</div>
+				<div class="footer__bottom">
+					<div class="footer__rights footer__txt-gray">© 2023 OMG SMM. Всі права захищені </div>
+					<a href="#" class="footer__policy footer__txt-gray">Політика конфіденційності</a>
+				</div>
 			</div>
 		</footer>
 	</div>
-	<script src="js/app.min.js?_v=20230721010132"></script>
+	<div id="popupInvite" aria-hidden="true" class="popup">
+		<div class="popup__wrapper">
+			<div class="popup__content">
+				<button data-close type="button" class="popup__close"></button>
+				<form class="forms__form form" data-dev data-popup-message="#form-message" action="" method="POST">
+					<div class="form__input-wrapper">
+						<input required type="text" name="name" placeholder="Ім'я" class="form__input input">
+						<input required type="text" name="company" placeholder="Компанія" class="form__input input">
+						<input required type="email" name="email" placeholder="Пошта" class="form__input input">
+						<input required type="tel" name="tel" data-inputmask="'mask': '+38 (099) 999 99 99'" placeholder="+38 (0__) ___ __ __" class="form__input input">
+					</div>
+					<textarea name="message" class="form__textarea input" placeholder="Кілька слів про проєкт" data-autoheight required></textarea>
+					<div class="form__brief brief">
+						<div class="brief__file file">
+							<input id="formImage" accept="" type="file" name="image" class="file__input">
+							<div class="file__button">
+								<img src="img/icons/attach_file_dark.svg" alt="attach file">
+								<span class="file__button-text">Завантажити бриф</span>
+								<div id="formPreview" class="file__preview"></div>
+							</div>
+						</div>
+						<input type="url" name="url" placeholder="або залишити посилання" class="brief__input input">
+					</div>
+					<div class="form__submit-wrap">
+						<button type="submit" class="form__submit btn">Відправити</button>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+
+	<div id="popupMessageSent" aria-hidden="true" class="popup">
+		<div class="popup__wrapper">
+			<div class="popup__content">
+				<button data-close type="button" class="popup__close">Закрити</button>
+				<div class="popup__text">
+					Text
+				</div>
+			</div>
+		</div>
+	</div>
+	<script src="js/app.min.js?_v=20230721174920"></script>
 </body>
 
 </html>

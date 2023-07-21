@@ -2195,6 +2195,73 @@
 // =========================================================
 // -- 10 FORM SECTION -----------------------------------------
 // =========================================================
+.forms {
+  border-radius: rem(40) rem(40) 0 0;
+  background-color: #000;
+  @include adaptiveValue("padding-top", 170, 60,0,1920,769);
+  @include adaptiveValue("padding-top", 5,0,3,601,600);
+  @include adaptiveValue("padding-bottom", 152, 96,0,1920,480);
+  overflow: hidden;
+  @media (max-width:$mobile){
+    border-radius: rem(30) rem(30) 0 0;
+  }
+  // .forms__container
+  &__container {
+    max-width: rem(770);
+  }
+  // .forms__head
+  &__head {
+    position: relative;
+    z-index: 1;
+    @include adaptiveValue("margin-bottom", 69, 27,0,1920,480);
+    @media (max-width: em(600.98)){
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+  }
+  // .forms__img-man
+  &__img-man {
+    position: absolute;
+    bottom: 0;
+    right: rem(-250);
+
+    width: rem(255);
+    height: auto;
+    @media (max-width: em(1430.98)){
+        bottom: rem(-30);
+    }
+    @media (max-width: em(1265.98)){
+        bottom: rem(-80);
+        right: 0;
+    }
+    @media (max-width: em(600.98)){
+      position: relative;
+      bottom: 0;
+      margin-bottom: rem(27);
+    }
+  }
+  // .forms__title
+  &__title {
+    @media (max-width: em(600.98)){
+        text-align: center;
+    }
+  }
+  // .forms__img-vector
+  &__img-vector {
+    position: absolute;
+    top: -100%;
+    left: 20%;
+    z-index: -1;
+    @media (max-width:$mobile){
+       display: none; 
+    }
+  }
+  // .forms__form
+  &__form {
+  }
+}
+
 
 
 
@@ -2202,6 +2269,5 @@
 
 // 1. Навигация по странице из хедера
 // 2. Видео шоурил встроить
-// 3. последняя секция
-// 4. Попап + форма
 // 5. Header "почати співпрацю" - куда ведет
+// 6. 
