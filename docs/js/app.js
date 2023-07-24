@@ -8060,7 +8060,7 @@
                 }
             }));
         }));
-        window["FLS"] = true;
+        window["FLS"] = false;
         isWebp();
         addTouchClass();
         addLoadedClass();

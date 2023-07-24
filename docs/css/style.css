@@ -1741,6 +1741,62 @@ summary::-webkit-details-marker {
 
 .blog {
   background-color: black;
+  overflow: hidden;
+}
+
+.blog__container {
+  position: relative;
+  z-index: 1;
+}
+
+.blog__vector-wrapper {
+  position: absolute;
+  pointer-events: none;
+  z-index: -1;
+  top: -17%;
+  left: 10%;
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+  height: -webkit-fit-content;
+  height: -moz-fit-content;
+  height: fit-content;
+  -webkit-animation: vector-blog 50s linear 0s infinite normal forwards;
+          animation: vector-blog 50s linear 0s infinite normal forwards;
+}
+
+@-webkit-keyframes vector-blog {
+  0% {
+    -webkit-transform: rotate(0deg) scale(1);
+            transform: rotate(0deg) scale(1);
+  }
+
+  50% {
+    -webkit-transform: rotate(180deg) scale(0.7);
+            transform: rotate(180deg) scale(0.7);
+  }
+
+  100% {
+    -webkit-transform: rotate(360deg) scale(1);
+            transform: rotate(360deg) scale(1);
+  }
+}
+
+@keyframes vector-blog {
+  0% {
+    -webkit-transform: rotate(0deg) scale(1);
+            transform: rotate(0deg) scale(1);
+  }
+
+  50% {
+    -webkit-transform: rotate(180deg) scale(0.7);
+            transform: rotate(180deg) scale(0.7);
+  }
+
+  100% {
+    -webkit-transform: rotate(360deg) scale(1);
+            transform: rotate(360deg) scale(1);
+  }
 }
 
 .blog__title {
@@ -1761,6 +1817,7 @@ summary::-webkit-details-marker {
 
 .blog__slider {
   position: relative;
+  z-index: 1;
   margin: 0 auto;
   overflow: unset !important;
 }

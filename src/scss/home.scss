@@ -1130,10 +1130,41 @@
 // =========================================================
 .blog {
   background-color: black;
+  overflow: hidden;
   @include adaptiveValue("padding-top", 115, 50,0,1920,480);
   @include adaptiveValue("padding-bottom", 125, 60,0,1920,480);
   // .blog__container
   &__container {
+    position: relative;
+    z-index: 1;
+  }
+	// .blog__vector-wrapper
+	&__vector-wrapper {
+    position: absolute;
+    pointer-events: none;
+    z-index: -1;
+    top: -17%;
+    left: 10%;
+    width: fit-content;
+    height: fit-content;
+    animation: vector-blog 50s linear 0s infinite normal forwards;
+
+    @keyframes vector-blog {
+      0% {
+        transform: rotate(0deg) scale(1);
+      }
+      50% {
+        transform: rotate(180deg) scale(0.7);
+      }
+      100% {
+        transform: rotate(360deg) scale(1);
+      }
+    }
+	}
+  // .blog__vector
+  &__vector {
+  
+    
   }
   // .blog__title
   &__title {
@@ -1156,6 +1187,7 @@
   // .blog__slider
   &__slider {
     position: relative;
+    z-index: 1;
     margin: 0 auto;
     overflow: unset !important;
     // @include adaptiveValue("width", 1400, 1170,0,1920,1440);
