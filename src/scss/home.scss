@@ -1158,28 +1158,33 @@
     position: relative;
     margin: 0 auto;
     overflow: unset !important;
-    @include adaptiveValue("width", 1400, 1170,0,1920,1440);
-    @include adaptiveValue("width", 1170, 850,3,1440,1024);
+    // @include adaptiveValue("width", 1400, 1170,0,1920,1440);
+    @include adaptiveValue("width", 1400, 990,0,1920,1440);
+    @include adaptiveValue("width", 990, 850,3,1440,1024);
     @include adaptiveValue("width", 850,730,3,1024,768 );
     @include adaptiveValue("width", 730, 440,3,768,480);
     @include adaptiveValue("width", 440, 280,3,480,320);
 
-    @include adaptiveValue("height", 702, 573,0,1920,1440);
-    @include adaptiveValue("height", 573, 460,3,1440,1024);
+    @include adaptiveValue("height", 702, 520,0,1920,1440);
+    @include adaptiveValue("height", 520, 460,3,1440,1024);
     @include adaptiveValue("height", 460, 402,3,1024,768);
     @include adaptiveValue("height", 402, 316,3,768,480);
 
     &:not(:last-child) {
-      margin-bottom: rem(51);
+      // margin-bottom: rem(51);
+      @include adaptiveValue("margin-bottom", 51, 25,0,1920,1440);
     }
   }
   // .blog__wrapper
   &__wrapper {
     align-items: center;
-    left: -20px;
-    @media (max-width:$mobile){
-       left: -10px; 
+    left: rem(-20);
+    @media (max-width: em(1024.98)){
+        left: rem(-13);
     }
+    // @media (max-width:$mobile){
+      //  left: rem(-10); 
+    // }
     @media (max-width:$mobileSmall){
        left: 0; 
     }
@@ -1206,7 +1211,10 @@
       @media (max-width: em(1100.98)){
           transform: translateX(30px);
       }
-      @media (max-width:$mobile){
+      // @media (max-width:$mobile){
+        //  transform: unset; 
+      // }
+      @media (max-width:$mobileSmall){
          transform: unset; 
       }
     }
@@ -1331,25 +1339,34 @@
   }
   // .slide-blog__img-link
   &__img-link {
+    position: relative;
+    padding-bottom: 99%;
     display: block;
     overflow: hidden;
     border-radius: rem(14.3);
     margin-bottom: rem(6);
     border: rem(0.8) solid white;
     transition: all .55s ease;
-    @include adaptiveValue("width", 403, 182,0,1920,480);
+    // @include adaptiveValue("width", 403, 182,0,1920,480);
+    @include adaptiveValue("width", 403, 290,0,1920,1440);
+    @include adaptiveValue("width", 290, 182,3,1440,480);
 
     .swiper-slide-active & {
-      @include adaptiveValue("width", 516, 234,0,1920,480);
+      // @include adaptiveValue("width", 516, 234,0,1920,480);
+      @include adaptiveValue("width", 516, 371,0,1920,1440);
+      @include adaptiveValue("width", 371, 234,3,1440,480);
     }
     
     @media (max-width:$mobile){
        border-radius: rem(11); 
       }
       img {
+        position: absolute;
+        top: 0;
+        left: 0;
         width: 100%;
         height: 100%;
-        object-fit: contain;
+        object-fit: cover;
       }
     }
   // .slide-blog__bottom
@@ -1403,6 +1420,9 @@
     justify-content: space-between;
     width: 100%;
     margin-bottom: rem(24);
+    @media (max-width: em(1440.98)){
+        margin-bottom: rem(15);
+    }
   }
   // .services-tab__title
   &__title {
@@ -1413,7 +1433,8 @@
     align-items: center;
     justify-content: center;
     width: 100%;
-    @include adaptiveValue("height", 172, 55,0,1920,480);
+    @include adaptiveValue("height", 172, 110,0,1920,1440);
+    @include adaptiveValue("height", 110, 55,0,1440,480);
 
     color: $mainColor;
     text-align: center;
@@ -1448,9 +1469,12 @@
     border: rem(1) solid #2521DB;
     background: #000;
     padding: rem(87) rem(50) rem(50);
+    @media (max-width:em(1440.98)){
+       padding: rem(35) rem(25) rem(25); 
+    }
     @media (max-width:$mobile){
+       border-radius: rem(10); 
        padding: rem(35) rem(20) rem(20); 
-       border-radius: rem(10);
     }
 
     &.tab-services-spoll  {
@@ -1480,6 +1504,9 @@
     grid-template-columns: repeat(3, 1fr);
     @include adaptiveValue("column-gap", 100, 20,0,1920,600);
     row-gap: rem(70);
+    @media (max-width: em(1440.98)){
+        row-gap: rem(40);
+    }
     @media (max-width: em(600.98)){
       grid-template-columns: repeat(2, 1fr);
     }
@@ -1510,7 +1537,8 @@
   // .tab-services-sec__title
   &__title {
     color: $secondColor;
-    @include adaptiveValue("font-size", 24, 14,0,1920,480);
+    @include adaptiveValue("font-size", 24, 18,0,1920,1440);
+    @include adaptiveValue("font-size", 18, 14,0,1440,480);
     font-weight: 600;
     line-height: normal;
     text-transform: uppercase;
@@ -1525,7 +1553,7 @@
     @include adaptiveValue("font-size", 20, 12,0,1920,480);
     font-weight: 500;
     line-height: normal;
-    text-transform: uppercase;
+    text-transform: initial;
   }
   // .tab-services-sec__sub-item
   &__sub-item {
@@ -1536,7 +1564,7 @@
     @include adaptiveValue("font-size", 20, 12,0,1920,480);
     font-weight: 500;
     line-height: normal;
-    text-transform: uppercase;
+    text-transform: initial;
     
     padding-left: rem(18);
     position: relative;
@@ -1628,7 +1656,7 @@
   // .tab-services-spoll__title-name
   &__title-name {
     display: inline-block;
-    @include adaptiveValue("font-size", 24, 18,0,1920,480);
+    @include adaptiveValue("font-size", 24, 18,0,1920,1440);
     font-weight: 600;
     line-height: calc(31/24);
     text-transform: uppercase;
@@ -1644,6 +1672,11 @@
     justify-content: center;
     align-items: center;
     flex: 0 0 auto;
+
+    @media (max-width: em(1440.98)){
+      width: rem(32);
+      height: rem(32);
+    }
 
     @media (max-width:$mobileSmall){
       width: rem(30);
@@ -1692,10 +1725,11 @@
   // .tab-services-spoll__li
   &__li {
     color: #FFF;
-    @include adaptiveValue("font-size", 22, 14,0,1920,480);
+    @include adaptiveValue("font-size", 22, 17,0,1920,1440);
+    @include adaptiveValue("font-size", 17, 14,0,1440,480);
     font-weight: 500;
     line-height: normal;
-    text-transform: uppercase;
+    text-transform: initial;
     &:not(:last-child) {
       margin-bottom: rem(5);
     }

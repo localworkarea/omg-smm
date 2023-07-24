@@ -78,6 +78,7 @@ textarea.input {
 		padding: rem(19) rem(30) rem(0) rem(0);
 		background-color: #000;
 		margin-bottom: rem(20);
+		border-radius: 0;
 	}
 	// .form__brief
 	&__brief {
@@ -206,6 +207,7 @@ textarea.input {
 	}
 	// .brief__input
 	&__input {
+		border-radius: 0;
 		background-color: #000;
 		border-bottom: rem(2) solid white;
 		padding: rem(22) rem(10) rem(18) rem(0);
@@ -214,6 +216,7 @@ textarea.input {
 
 .file {
 	position: relative;
+	overflow: hidden;
 	// .file__input
 	&__input {
 		position: absolute;
