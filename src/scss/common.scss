@@ -9,7 +9,8 @@
 // filter: invert(100%) sepia(0%) saturate(0%) hue-rotate(157deg) brightness(111%) contrast(102%);
 
 .main-title {
-  @include adaptiveValue("font-size", 55, 30,0,1920,480);
+  @include adaptiveValue("font-size", 55, 43,0,1920,1440);
+  @include adaptiveValue("font-size", 43, 30,3,1440,480);
   font-weight: 500;
   text-transform: uppercase;
 

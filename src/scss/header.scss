@@ -9,6 +9,9 @@
 	display: flex;
 	align-items: center;
 	border-radius: 0 0 rem(40) rem(40);
+	@media (max-width: em(1440.98)){
+		  height: rem(71);
+	}
 	@media (max-width:$mobile){
 		border-radius: 0 0 rem(20) rem(20);
 		height: rem(68);
@@ -32,7 +35,9 @@
 		position: relative;
 		z-index: 5;
 		img {
-			@include adaptiveValue("width", 70, 44, 0, 1200, 375);
+			@include adaptiveValue("width", 70, 55, 0, 1920, 1440);
+			@include adaptiveValue("width", 55, 44,3,1440,375);
+			height: auto;
 		}
 	}
 	// .header__menu
@@ -87,7 +92,7 @@
 			transition: all .1s ease .3s;
 
 			border-radius: 0 0 rem(40) rem(40);
-			height: rem(84);
+			height: rem(71);
 			background-color: white;
 			.menu-open & {
 				opacity: 1;
@@ -118,7 +123,7 @@
 		align-items: center;
 		flex-wrap: wrap;
 		row-gap: rem(10);
-		@include adaptiveValue("column-gap", 78, 35,0,1350,1200);
+		@include adaptiveValue("column-gap", 78, 35,0,1920,1200);
 		@media (max-width:em(1015.98)){
 			 flex-direction: column; 
 			 row-gap: rem(20);
@@ -162,7 +167,9 @@
 	}
 	// .menu__link
 	&__link {
-		font-size: rem(18);
+		// font-size: rem(18);
+		@include adaptiveValue("font-size", 18, 14,0,1920,1440);
+		@include adaptiveValue("font-size", 14, 35,3,1016,1015);
 		font-weight: 600;
 		position: relative;
 		transition: all .3s ease;
@@ -183,9 +190,9 @@
 				width: 100%;
 			}
 		}
-		@media (max-width: em(1015.98)){
-			  font-size: rem(35);
-		}
+		// @media (max-width: em(1015.98)){
+		// 	  // font-size: rem(35);
+		// }
 	}
 	// .menu__lng
 	&__lng {
@@ -197,12 +204,19 @@
 		align-items: center;
 		color: white;
 
+		@include adaptiveValue("height", 52, 41,0,1920,1440);
+		@include adaptiveValue("height", 41, 52,3,1016,1015);
 		width: 100%;
 		max-width: fit-content;
-		font-size: rem(18);
+		// font-size: rem(18);
+		@include adaptiveValue("font-size", 18, 14,0,1920,1440);
+		@include adaptiveValue("font-size", 14, 18,3,1016,1015);
 		font-weight: 700;
 		border-radius: rem(40);
-		padding: rem(20) rem(40);
+		@include adaptiveValue("padding-left", 40,25,0,1920,1440);
+		@include adaptiveValue("padding-left", 25, 40,3,1016,1015);
+		@include adaptiveValue("padding-right", 40, 25,0,1920,1440);
+		@include adaptiveValue("padding-right", 25, 40,3,1016,1015);
 		border: rem(1) solid transparent;
 
 		background-color: $mainColor;

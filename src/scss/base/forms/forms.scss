@@ -94,6 +94,28 @@ textarea.input {
 	// .form__submit
 	&__submit {
 		max-width: rem(350);
+	
+				// .form__submit_active
+				&_active {
+					._sent & {
+						display: none;
+					}
+				}
+				// .form__submit_sent
+				&_sent {
+					display: none;
+					._sent & {
+						display: block;
+					}
+				}
+	
+		._sent & {
+			max-width: fit-content;
+			padding: 0 rem(25);
+			color: $secondColor;
+			background-color: #000;
+			pointer-events: none;
+		}
 	}
 }
 

@@ -153,5 +153,28 @@ body::after {
 }
 
 
+.popup-message {
+	.popup__content {
+		background-color: $secondColor;
+		@media (max-width:$mobileSmall){
+			padding: rem(50) rem(20) rem(50); 
+	 }
+	}
+	// .popup-message__txt
+	&__txt {
+		font-style: normal;
+		font-weight: 600;
+	}
+	// .popup-message__txt-big
+	&__txt-big {
+		text-transform: uppercase;
+		@include adaptiveValue("font-size", 55, 32);
+		@include adaptiveValue("margin-bottom", 32, 20);
+	}
+	// .popup-message__txt-small
+	&__txt-small {
+		@include adaptiveValue("font-size", 20, 18);
+	}
+}
 
 

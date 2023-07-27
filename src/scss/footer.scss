@@ -1,13 +1,20 @@
 .footer {
   background-color: #000;
   padding-top: rem(40);
-  padding-bottom: rem(70);
-  border: rem(1) solid $secondColor;
+  @include adaptiveValue("padding-bottom", 70, 40,0,1920,1440);
+  border-top: rem(1) solid $secondColor;
   @media (max-width: em(600.98)){
       border: unset;
   }
   // .footer__container
   &__container {
+    max-width: rem(1840);
+    padding-left: rem(120);
+    padding-right: rem(120);
+    @media (max-width: em(1200.98)){
+      padding-left: rem(20);
+      padding-right: rem(20);
+    }
   }
   // .footer__top
   &__top {
@@ -26,7 +33,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    @include adaptiveValue("padding-top", 40, 34,0,1920,480);
+    @include adaptiveValue("padding-top", 30, 25,0,1920,480);
     @media (max-width: em(600.98)){
         flex-direction: column;
         row-gap: rem(15);

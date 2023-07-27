@@ -49,6 +49,9 @@ function initSliders() {
 					spaceBetween: 7.5,
 				},
 				1201: {
+					spaceBetween: 9,
+				},
+				1450: {
 					spaceBetween: 12,
 				},
 			},
@@ -87,6 +90,9 @@ function initSliders() {
 					spaceBetween: 7.5,
 				},
 				1201: {
+					spaceBetween: 9,
+				},
+				1450: {
 					spaceBetween: 12,
 				},
 			},
@@ -132,8 +138,11 @@ function initSliders() {
 					direction: 'vertical',
 				},
 				1201: {
-					spaceBetween: 12,
+					spaceBetween: 9,
 				},
+				1450: {
+					spaceBetween: 12,
+				}
 			},
 			on: {
 
@@ -155,7 +164,8 @@ function initSliders() {
 			observeParents: true,
 			slidesPerView: "auto",
 			spaceBetween: 14,
-			speed: 500,
+			loop: true,
+			speed: 800,
 			navigation: {
 				prevEl: '.employee-slider-one__slider .swiper-button-prev',
 				nextEl: '.employee-slider-one__slider .swiper-button-next',
@@ -172,7 +182,8 @@ function initSliders() {
 			observeParents: true,
 			slidesPerView: "auto",
 			spaceBetween: 14,
-			speed: 500,
+			loop: true,
+			speed: 800,
 			navigation: {
 				prevEl: '.employee-slider-two__slider .swiper-button-prev',
 				nextEl: '.employee-slider-two__slider .swiper-button-next',
@@ -189,8 +200,8 @@ function initSliders() {
 			observeParents: true,
 			slidesPerView: "auto",
 			spaceBetween: 14,
-			// autoHeight: true,
-			speed: 500,
+			loop: true,
+			speed: 800,
 			navigation: {
 				prevEl: '.employee-slider-three__slider .swiper-button-prev',
 				nextEl: '.employee-slider-three__slider .swiper-button-next',
@@ -244,6 +255,8 @@ function initSliders() {
 			observer: true,
 			observeParents: true,
 			slidesPerView: 3,
+			// centeredSlides: true,
+			loop: true,
 			spaceBetween: 20,
 			speed: 800,
 			navigation: {
@@ -253,15 +266,19 @@ function initSliders() {
 			breakpoints: {
 				320: {
 					slidesPerView: 1,
+					centeredSlides: false,
 				},
 				600: {
-					slidesPerView: 1.5,
+					slidesPerView: 2,
 				},
 				769: {
-					slidesPerView: 2,
+					slidesPerView: 2.5,
 				},
 				1150: {
 					slidesPerView: 3,
+				},
+				1201: {
+					centeredSlides: true,
 				}
 			},
 			on: {

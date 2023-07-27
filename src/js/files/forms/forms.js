@@ -188,6 +188,9 @@ export function formSubmit() {
 					let responseResult = await response.json();
 					form.classList.remove('_sending');
 					formSent(form, responseResult);
+
+					// додати класс до форми (custom):
+					form.classList.add('_sent');
 				} else {
 					alert("Помилка");
 					form.classList.remove('_sending');
@@ -195,6 +198,9 @@ export function formSubmit() {
 			} else if (form.hasAttribute('data-dev')) {	// Якщо режим розробки
 				e.preventDefault();
 				formSent(form);
+
+				// додати класс до форми (custom):
+				form.classList.add('_sent');
 			}
 		} else {
 			e.preventDefault();
@@ -224,6 +230,8 @@ export function formSubmit() {
 		formValidate.formClean(form);
 		// Повідомляємо до консолі
 		formLogging(`Форму відправлено!`);
+
+		
 	}
 	function formLogging(message) {
 		FLS(`[Форми]: ${message}`);

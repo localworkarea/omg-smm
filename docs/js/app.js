@@ -4349,6 +4349,7 @@
                             let responseResult = await response.json();
                             form.classList.remove("_sending");
                             formSent(form, responseResult);
+                            form.classList.add("_sent");
                         } else {
                             alert("Помилка");
                             form.classList.remove("_sending");
@@ -4356,6 +4357,7 @@
                     } else if (form.hasAttribute("data-dev")) {
                         e.preventDefault();
                         formSent(form);
+                        form.classList.add("_sent");
                     }
                 } else {
                     e.preventDefault();
@@ -7597,6 +7599,9 @@
                             spaceBetween: 7.5
                         },
                         1201: {
+                            spaceBetween: 9
+                        },
+                        1450: {
                             spaceBetween: 12
                         }
                     },
@@ -7630,6 +7635,9 @@
                             spaceBetween: 7.5
                         },
                         1201: {
+                            spaceBetween: 9
+                        },
+                        1450: {
                             spaceBetween: 12
                         }
                     },
@@ -7668,6 +7676,9 @@
                             direction: "vertical"
                         },
                         1201: {
+                            spaceBetween: 9
+                        },
+                        1450: {
                             spaceBetween: 12
                         }
                     },
@@ -7687,7 +7698,8 @@
                 observeParents: true,
                 slidesPerView: "auto",
                 spaceBetween: 14,
-                speed: 500,
+                loop: true,
+                speed: 800,
                 navigation: {
                     prevEl: ".employee-slider-one__slider .swiper-button-prev",
                     nextEl: ".employee-slider-one__slider .swiper-button-next"
@@ -7700,7 +7712,8 @@
                 observeParents: true,
                 slidesPerView: "auto",
                 spaceBetween: 14,
-                speed: 500,
+                loop: true,
+                speed: 800,
                 navigation: {
                     prevEl: ".employee-slider-two__slider .swiper-button-prev",
                     nextEl: ".employee-slider-two__slider .swiper-button-next"
@@ -7713,7 +7726,8 @@
                 observeParents: true,
                 slidesPerView: "auto",
                 spaceBetween: 14,
-                speed: 500,
+                loop: true,
+                speed: 800,
                 navigation: {
                     prevEl: ".employee-slider-three__slider .swiper-button-prev",
                     nextEl: ".employee-slider-three__slider .swiper-button-next"
@@ -7755,6 +7769,7 @@
                 observer: true,
                 observeParents: true,
                 slidesPerView: 3,
+                loop: true,
                 spaceBetween: 20,
                 speed: 800,
                 navigation: {
@@ -7763,16 +7778,20 @@
                 },
                 breakpoints: {
                     320: {
-                        slidesPerView: 1
+                        slidesPerView: 1,
+                        centeredSlides: false
                     },
                     600: {
-                        slidesPerView: 1.5
+                        slidesPerView: 2
                     },
                     769: {
-                        slidesPerView: 2
+                        slidesPerView: 2.5
                     },
                     1150: {
                         slidesPerView: 3
+                    },
+                    1201: {
+                        centeredSlides: true
                     }
                 },
                 on: {}
