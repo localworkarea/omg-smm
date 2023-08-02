@@ -894,6 +894,9 @@ summary::-webkit-details-marker {
 }
 
 .menu__btn-link {
+  -webkit-box-flex: 0;
+      -ms-flex: 0 0 auto;
+          flex: 0 0 auto;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
